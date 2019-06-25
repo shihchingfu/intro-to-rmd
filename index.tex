@@ -1,0 +1,924 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Introduction to R Markdown},
+            pdfauthor={Shih Ching Fu},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Introduction to R Markdown}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Shih Ching Fu}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{ResBaz Perth 2019}
+
+
+\begin{document}
+\maketitle
+
+\hypertarget{learning-objectives}{%
+\subsection{Learning Objectives}\label{learning-objectives}}
+
+During this session you'll get a brief introduction to R Markdown. We'll
+cover the basic building blocks of an R Markdown file and learn how to
+knit reports from an R Notebook using RStudio\footnote{RStudio,
+  \url{https://www.rstudio.com/}}.
+
+The only pre-requisite is having R and RStudio installed on your
+computer since the needed packages are installed by default. You don't
+even need to know much R!
+
+After completing this lesson you should be able to:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create and edit an R Notebook from scratch in RStudio
+\item
+  Knit an R Notebook containing commonly used R Markdown commands into
+  an HTML report
+\item
+  Know where to get further information on more advanced R Markdown
+  usage
+\end{enumerate}
+
+\hypertarget{source-materials}{%
+\subsection{Source materials}\label{source-materials}}
+
+The materials for this lesson are derived heavily from the following
+sources which are excellent references in their own right:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://r4ds.had.co.nz/}{R for Data Science} (Grolemund and
+  Wickham 2017)
+\item
+  \href{http://swcarpentry.github.io/r-novice-gapminder/}{R for
+  Reproducible Scientific Analysis} (Wright and Zimmerman 2016)
+\item
+  \href{https://bookdown.org/yihui/rmarkdown/}{R Markdown: The
+  Definitive Guide} (Xie, Allaire, and Grolemund 2018)
+\item
+  \href{https://rmarkdown.rstudio.com/lesson-1.html}{R Markdown}
+  (RStudio 2018)
+\end{itemize}
+
+\hypertarget{why-use-r-markdown}{%
+\subsection{Why use R Markdown?}\label{why-use-r-markdown}}
+
+As an analyst you'll forever be compiling reports to document your
+methods and findings. These reports shall no doubt contain a mixture of
+word explanations, tables, and figures. From a productivity perspective
+wouldn't it be helpful to draft such reports from in a single electronic
+source rather than copying and pasting between documents? Furthermore,
+from a reproducible research perspective, wouldn't it be extremely
+valuable if collaborators or colleagues (or sceptics) could take your
+data, code, and text, and reproduce the exact same figures and results?
+Well, R Markdown helps with both of these.
+
+R Markdown, via the \texttt{knitr}\footnote{knitr,
+  \url{http://yihui.name/knitr/}} package, allows us to embed code into
+documents so that results such as graphs and figures may be interleaved
+amongst explanatory text. Should you wish to change some text or fix an
+error, a new document can be recompiled at the click of a button. These
+output documents may be in various file formats including HTML, PDF, or
+MS Word.
+
+According to Grolemund and Wickham (2017) R Markdown files are designed
+for use in three ways:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Communicating to decision makers, focussing on conclusions rather than
+  the code behind the analysis.
+\item
+  Collaborating with other analysts who are interested in \emph{both}
+  your conclusions and how you reached them.
+\item
+  As an environment in which to do analysis, as a modern day lab
+  notebook where you can capture not only what you did, but also what
+  you were thinking.
+\end{enumerate}
+
+\hypertarget{creating-an-r-notebook}{%
+\subsection{Creating an R Notebook}\label{creating-an-r-notebook}}
+
+RStudio includes all that you need to get started with creating an R
+Notebook. The steps below create a new R Notebook with file extension
+\texttt{.Rmd} which happens to include some basic R Markdown content.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Launch RStudio
+\item
+  Click \emph{File} menu
+\item
+  Click \emph{New File} \(\blacktriangleright\) \emph{R Notebook}
+\end{enumerate}
+
+\includegraphics{./createnewrnotebook.png}
+
+\textbf{Exercise 1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create a new RStudio project, call it \texttt{intro-to-rmd}.
+\item
+  Create a new R Notebook.
+\item
+  Save the notebook as \texttt{my-notebook.Rmd}.
+\item
+  See if you can identify the YAML header, formatted text, and a `code
+  chunk'.
+\end{enumerate}
+
+\hypertarget{knitting-an-r-notebook}{%
+\subsection{Knitting an R Notebook}\label{knitting-an-r-notebook}}
+
+When you knit an R Notebook the \texttt{.Rmd} file is sent to
+\texttt{knitr} which executes any included R code and creates an
+intermediate Markdown \texttt{.md} document containing that code and its
+output. The \texttt{.md} file is then processed by
+\texttt{pandoc}\footnote{pandoc, \url{http://pandoc.org/}} which is
+responsible for creating the finished file.
+
+\includegraphics{https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/9791d/images/rmarkdownflow.png}
+
+The advantage of this two step workflow is that you can create a wide
+range of output formats. For example, slide presentations, dashboards,
+websites, and webapps.
+
+To knit a notebook in RStudio, click the \emph{Knit} button found in the
+toolbar of the source editor pane, or use the keyboard shortcut
+\emph{Ctrl + Shift + K}.
+
+\includegraphics{./knitnotebook.png}
+
+A preview of the knitted document will appear in its own window (or
+depending on settings, in the \emph{Viewer} pane). You can specified
+your preferred preview location by clicking the white cog button and
+choosing \emph{Preview in Window} or \emph{Preview in Viewer Pane}.
+
+\includegraphics{./previewinviewer.png}
+
+Sometimes you may see a \emph{Preview Notebook} button instead of a
+\emph{Knit} button. \emph{Preview Notebook} shows you a rendered HTML
+copy of the contents of the editor but unlike \emph{Knit}, \emph{Preview
+Notebook} \textbf{does not} run any R code. Instead it reuses the output
+from when the code was last executed.
+
+\textbf{Exercise 2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Knit to HTML the notebook \texttt{my-notebook.Rmd} that you created in
+  Exercise 1.
+\item
+  Observe the correspondence between the R Markdown and the resultant
+  document.
+\item
+  Make some changes to the \texttt{.Rmd} file and re-knit the document.
+\end{enumerate}
+
+TIP: Use the keyboard shortcut \emph{Ctrl + Shift + K} to save and knit
+the notebook in one action.
+
+\hypertarget{structure-of-an-.rmd-file}{%
+\subsection{\texorpdfstring{Structure of an \texttt{.Rmd}
+file}{Structure of an .Rmd file}}\label{structure-of-an-.rmd-file}}
+
+An R Markdown \texttt{.Rmd} file has three components:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Formatted text
+\item
+  Code chunks
+\item
+  YAML header
+\end{enumerate}
+
+\hypertarget{formatted-text}{%
+\subsection{Formatted Text}\label{formatted-text}}
+
+Text in \texttt{.Rmd} files are written in Pandoc's Markdown\footnote{Pandoc's
+  Markdown, \url{https://pandoc.org/MANUAL.html\#pandocs-markdown}}
+whose syntax is designed to be human-readable and suggestive of its
+resultant HTML rendering. The text to be styled is usually pre- and
+suffixed by a special character. Below are the most common styles you'll
+be using in R Notebooks.
+
+\hypertarget{text-styles}{%
+\subsubsection{Text styles}\label{text-styles}}
+
+\emph{Italic} styling is done with single asterisks or underscores:
+\texttt{*italic*} or \texttt{\_italic\_}
+
+\textbf{Bold} styling is done with double asterisks or underscores:
+\texttt{**bold**} or \texttt{\_\_bold\_\_}
+
+\textbf{\emph{Bold \& italic}} styling is done with triple asterisks or
+underscores: \texttt{***bold\ \&\ italic***} or
+\texttt{\_\_\_bold\ \&\ italic\_\_\_}
+
+\texttt{Code} styling is done with single back-ticks:
+\texttt{\textasciigrave{}plot(iris)\textasciigrave{}}
+
+S\textsuperscript{uperscripting} is done with carets:
+\texttt{S\^{}uperscripting\^{}}
+
+S\textsubscript{ubscripting} is done with tildes:
+\texttt{S\textasciitilde{}ubscripting\textasciitilde{}}
+
+\sout{Strikethrough} is done with double tildes:
+\texttt{\textasciitilde{}\textasciitilde{}Strikethrough\textasciitilde{}\textasciitilde{}}
+
+\hypertarget{headings}{%
+\subsubsection{Headings}\label{headings}}
+
+Headings are specified using hash \texttt{\#} prefixes.
+
+\hypertarget{level-1-heading-level-1-heading}{%
+\section{\texorpdfstring{Level 1 heading
+\texttt{\#\ Level\ 1\ heading}}{Level 1 heading \# Level 1 heading}}\label{level-1-heading-level-1-heading}}
+
+\hypertarget{level-2-heading-level-2-heading}{%
+\subsection{\texorpdfstring{Level 2 heading
+\texttt{\#\#\ Level\ 2\ heading}}{Level 2 heading \#\# Level 2 heading}}\label{level-2-heading-level-2-heading}}
+
+\hypertarget{level-3-heading-level-3-heading}{%
+\subsubsection{\texorpdfstring{Level 3 heading
+\texttt{\#\#\#\ Level\ 3\ heading}}{Level 3 heading \#\#\# Level 3 heading}}\label{level-3-heading-level-3-heading}}
+
+\hypertarget{unordered-lists}{%
+\subsubsection{Unordered Lists}\label{unordered-lists}}
+
+Items of an unordered list are prefixed with an asterisk \texttt{*} (or
+hyphen \texttt{-} or plus \texttt{+}):
+
+\begin{verbatim}
+* Item 1
+
+* Item 2
+    * Item 2a
+    * Item 2b
+\end{verbatim}
+
+Inserting extra carriage returns spaces out the bullet points and tab
+stops nests bullet points.
+
+\begin{itemize}
+\item
+  Item 1
+\item
+  Item 2
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Item 2a
+  \item
+    Item 2b
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{ordered-lists}{%
+\subsubsection{Ordered Lists}\label{ordered-lists}}
+
+Ordered lists are prefixed with numbers or letters.
+
+\begin{verbatim}
+1. First ordered list item
+2. Second ordered list item
+    a. First nested ordered list item
+    
+    a. Second nested ordered list item
+    
+1. Third ordered list item
+\end{verbatim}
+
+Notice that the numbering is incremented automatically in the output
+even if typed out of order.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  First ordered list item
+\item
+  Second ordered list item
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    First nested ordered list item
+  \item
+    Second nested ordered list item
+  \end{enumerate}
+\item
+  Third ordered list item
+\end{enumerate}
+
+\hypertarget{links}{%
+\subsubsection{Links}\label{links}}
+
+Clickable URLs are inserted by enclosing the URL in greater-than
+\texttt{\textless{}} and less-than \texttt{\textgreater{}} symbols.
+
+\texttt{\textless{}http://example.com\textgreater{}} for
+\url{http://example.com}
+
+Custom anchor text is enclosed in square parentheses \texttt{{[}{]}}
+followed by the URL in round parentheses \texttt{()}.
+
+\texttt{{[}hypertext\ link{]}(http://example.com)} for
+\href{http://example.com}{hypertext link}
+
+\hypertarget{images}{%
+\subsubsection{Images}\label{images}}
+
+Images are inserted by providing a file path to the image, either a link
+to a locally stored file or a URL to an image hosted online. Notice the
+leading exclamation mark \texttt{!} and caption in square parentheses
+\texttt{{[}{]}}. Leave the square parentheses empty for no caption.
+
+\texttt{!{[}Optional\ caption:\ Curtin\ University\ logo{]}(https://global.curtin.edu.au/responsive-assets/img/logo-curtin-university.png)}
+
+\begin{figure}
+\centering
+\includegraphics{https://global.curtin.edu.au/responsive-assets/img/logo-curtin-university.png}
+\caption{Optional caption: Curtin University logo}
+\end{figure}
+
+\hypertarget{tables}{%
+\subsubsection{Tables}\label{tables}}
+
+You can manually create a text table by using hyphens \texttt{-} and
+pipes \texttt{\textbar{}} to insert horizontal grid-lines and delineate
+columns, respectively. Rows are ended with a carriage return. It is a
+bit tricky though!
+
+\begin{verbatim}
+First Header  | Second Header | Third Header
+------------- | ------------- | ------------
+Cell content  | Cell content  | Cell content
+Cell content  | Cell content  | Cell content
+\end{verbatim}
+
+produces
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+First Header & Second Header & Third Header\tabularnewline
+\midrule
+\endhead
+Cell content & Cell content & Cell content\tabularnewline
+Cell content & Cell content & Cell content\tabularnewline
+\bottomrule
+\end{longtable}
+
+If the output of a code chunk is a table of values, R Markdown will
+render a table accordingly.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+\end{verbatim}
+
+To get nicer looking tables we can use the \texttt{kable()} function
+from the \texttt{knitr} package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{kable}\NormalTok{(}\KeywordTok{head}\NormalTok{(iris))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rrrrl@{}}
+\toprule
+Sepal.Length & Sepal.Width & Petal.Length & Petal.Width &
+Species\tabularnewline
+\midrule
+\endhead
+5.1 & 3.5 & 1.4 & 0.2 & setosa\tabularnewline
+4.9 & 3.0 & 1.4 & 0.2 & setosa\tabularnewline
+4.7 & 3.2 & 1.3 & 0.2 & setosa\tabularnewline
+4.6 & 3.1 & 1.5 & 0.2 & setosa\tabularnewline
+5.0 & 3.6 & 1.4 & 0.2 & setosa\tabularnewline
+5.4 & 3.9 & 1.7 & 0.4 & setosa\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{latex-equations}{%
+\subsubsection{\texorpdfstring{\(\LaTeX\)
+equations}{\textbackslash{}LaTeX equations}}\label{latex-equations}}
+
+Surrounding an expression with dollar symbols \texttt{\$} will make R
+Markdown it as in-line \(\LaTeX\) formatting.
+
+\texttt{\$\textbackslash{}sum\_\{n=1\}\^{}\{\textbackslash{}infty\}\ 2\^{}\{-n\}\ =\ 1\$}
+produces \(\sum_{n=1}^{\infty} 2^{-n} = 1\).
+
+Using double dollar symbols \texttt{\$\$} will centre the equation on
+its own line.
+
+\texttt{\$\$\textbackslash{}sum\_\{n=1\}\^{}\{\textbackslash{}infty\}\ 2\^{}\{-n\}\ =\ 1\$\$}
+produces
+
+\[\sum_{n=1}^{\infty} 2^{-n} = 1\]
+
+\hypertarget{block-quotations}{%
+\subsubsection{Block quotations}\label{block-quotations}}
+
+Block quotations are created by prefixing each line with the
+greater-than symbol \texttt{\textless{}}.
+
+\begin{verbatim}
+> First level of quoting
+>
+> > Nested block quote
+>
+> Back to the first level
+\end{verbatim}
+
+produces
+
+\begin{quote}
+First level of quoting
+
+\begin{quote}
+Nested block quote
+\end{quote}
+
+Back to the first level
+\end{quote}
+
+\hypertarget{horizontal-rule}{%
+\subsubsection{Horizontal rule}\label{horizontal-rule}}
+
+Horizontal rules are inserted using three or more consecutive asterisks
+\texttt{*} (or hyphens \texttt{-}).
+
+\texttt{-\/-\/-\/-} produces
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\textbf{Exercise 3}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Put a horizontal rule underneath the content in your R notebook from
+  Exercise 2 (\texttt{my-notebook.Rmd}).
+\item
+  Below the rule insert a heading along the lines of ``Table of
+  Contents''
+\item
+  Under the heading, use an ordered list with nesting to create the
+  outline of a typical scientific report, e.g., Introduction, Data
+  Description, Methodology, etc.
+\item
+  Format some of the items in your table of contents using the styles
+  mentioned above.
+\item
+  Add to your notebook (anywhere) a hypertext link to the ResBaz Perth
+  2019 homepage.
+\item
+  (Optional) Using \(\LaTeX\) add (somewhere) to your notebook the
+  equation for Pythagoras' theorem or Euler's identity.
+\end{enumerate}
+
+\hypertarget{code-chunks}{%
+\subsection{Code Chunks}\label{code-chunks}}
+
+Code is inserted into R Notebooks as `code chunks'.These chunks are then
+executed and their results inserted directly into the finished document.
+Embedding code alongside prose annotations of your methods and results
+speaks of the reproducible research paradigm.
+
+Code chunks are enclosed by three back-ticks
+\texttt{\textasciigrave{}\textasciigrave{}\textasciigrave{}} followed by
+curly parentheses \texttt{\{\}} containing various parameters for the
+chunk.
+
+\begin{verbatim}
+```{r Structure of iris dataset}
+str(iris)
+```
+\end{verbatim}
+
+The first parameter \texttt{r} indicates that the chunk contains R code.
+\texttt{knitr} provides support for many other languages such as Bash,
+Perl, SQL, Python, and Julia.
+
+After the \texttt{r} is an optional name for this chunk. This helps with
+finding the chunk in the code navigator found in the bottom left of the
+editor pane.
+
+\includegraphics{./namedchunk.png}
+
+The knitted notebook will therefore include both the code and its output
+in the finished file.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+\end{verbatim}
+
+\textbf{Exercise 4}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Add a new R chunk by clicking in your notebook where you want to
+  insert the chunk and clicking the \emph{Insert} button on the toolbar.
+  Alternatively (and preferably) use the \emph{Ctrl + Alt + I} keyboard
+  shortcut.
+
+  \includegraphics{./insertrchunk.png}
+\item
+  Add the following code into the chunk \texttt{summary(iris)}.
+\item
+  Run the chunk by clicking the \emph{Run Current Chunk} button within
+  the chunk or by placing your cursor inside it and pressing \emph{Ctrl
+  + Shift + Enter}.
+
+  \includegraphics{./runchunk.png}
+\end{enumerate}
+
+\hypertarget{chunk-options}{%
+\subsubsection{Chunk options}\label{chunk-options}}
+
+Inside the curly parentheses \texttt{\{\}} that precede a code chunk we
+can specify options that affect how the results are knitted into the
+final document. We shall only cover a handful of options here and full
+documentation is found at \url{https://yihui.name/knitr/options}.
+
+\emph{1. Show the code and the output}
+
+\begin{verbatim}
+```{r}
+colMeans(iris[,-5])
+```
+\end{verbatim}
+
+produces
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colMeans}\NormalTok{(iris[,}\OperatorTok{-}\DecValTok{5}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##     5.843333     3.057333     3.758000     1.199333
+\end{verbatim}
+
+\emph{2. Show the code but don't execute it}
+
+\begin{verbatim}
+```{r, eval=FALSE}
+colMeans(iris[,-5])
+```
+\end{verbatim}
+
+produces
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colMeans}\NormalTok{(iris[,}\OperatorTok{-}\DecValTok{5}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{3. Show the output but don't show the code}
+
+\begin{verbatim}
+```{r, echo=FALSE}
+colMeans(iris[,-5])
+```
+\end{verbatim}
+
+produces
+
+\begin{verbatim}
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##     5.843333     3.057333     3.758000     1.199333
+\end{verbatim}
+
+\emph{4. Execute the code but show anything}
+
+\begin{verbatim}
+```{r, include=FALSE}
+colMeans(iris[,-5])
+```
+\end{verbatim}
+
+produces
+
+\emph{\textless{}blank\textgreater{}}
+
+\textbf{Exercise 5}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Duplicate (copy/paste) the code chunk from Exercise 4 but specify each
+  of the different options mentioned above. Observe the different output
+  in the knitted document.
+
+  Hint: instead of manually typing in the output options, RStudio
+  provides a shortcut by clicking the cog icon found in the top right
+  corner of the chunk, near to the \emph{Run} button.
+
+  \includegraphics{./chunkoptions.png}
+
+  Notice the \href{https://yihui.name/knitr/options/}{\emph{Chunk
+  options}} link to online documentation of the available options.
+\end{enumerate}
+
+\hypertarget{inline-r-code}{%
+\subsubsection{Inline R code}\label{inline-r-code}}
+
+R code can be embedded inline with formatted text and be executed upon
+knitting.
+
+\texttt{The\ \textasciigrave{}iris\textasciigrave{}\ dataset\ has\ \textasciigrave{}r\ nrows(iris)\textasciigrave{}\ rows.}
+produces
+
+The \texttt{iris} dataset has 150 rows.
+
+\hypertarget{chunks-with-figures}{%
+\subsubsection{Chunks with figures}\label{chunks-with-figures}}
+
+All the abovementioned code chunks only had numerical outputs. Here is
+an example of a chunk that produces a boxplot of the iris dataset, split
+by species.
+
+\begin{verbatim}
+```{r sepal width boxplot, echo=FALSE}
+boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3))
+```
+\end{verbatim}
+
+produces
+
+\includegraphics{index_files/figure-latex/sepal width boxplot-1.pdf}
+
+We can resize and align the plot using the \texttt{fig.height},
+\texttt{fig.width=}, and \texttt{fig.align} chunk options.
+
+\begin{verbatim}
+```{r echo=FALSE, fig.height=4, fig.width=4}`r `''`
+boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3))
+```
+\end{verbatim}
+
+produces
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+Other useful options include:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{fig.asp}: set aspect ratio
+\item
+  \texttt{fig.dim}: specify height and width as a tuple
+\item
+  \texttt{fig.align}: align figure to left, right, or centre of page
+\end{itemize}
+
+\hypertarget{yaml-header}{%
+\subsection{YAML Header}\label{yaml-header}}
+
+At the top of a \texttt{.Rmd} file is the YAML\footnote{YAML stands for
+  Yet Another Markup Language} header enclosed by triple hyphens
+\texttt{-\/-\/-}. It specifies settings that affect the entire document,
+in particular the output type.
+
+The default YAML header sets the notebook to knit to HTML.
+
+\begin{verbatim}
+---
+title: "R Notebook"
+output: html_notebook
+---
+\end{verbatim}
+
+Other output formats
+
+\begin{verbatim}
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
+---
+\end{verbatim}
+
+\begin{verbatim}
+---
+title: "R Presentation"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+\end{verbatim}
+
+Let's add our name as author and today's date.
+
+\texttt{-\/-\/-} \texttt{title:\ "R\ Notebook"}
+\texttt{author:\ "Shih\ Ching\ Fu"}\\
+\texttt{date:\ "4\ July\ 2019"}~\\
+\texttt{output:\ html\_notebook} \texttt{-\/-\/-}
+
+\hypertarget{create-a-bibliography}{%
+\subsection{Create a bibliography}\label{create-a-bibliography}}
+
+\footnote{pandoc, \url{http://pandoc.org/}} Footnotes
+
+\texttt{-\/-\/-} \texttt{title:\ "R\ Notebook"}
+\texttt{author:\ "Shih\ Ching\ Fu"}\\
+\texttt{date:\ "4\ July\ 2019"}~\\
+\texttt{output:\ html\_notebook} \texttt{bibliography:\ ref.bib}
+\texttt{-\/-\/-}
+
+\hypertarget{references}{%
+\subsection*{References}\label{references}}
+\addcontentsline{toc}{subsection}{References}
+
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-grolemund2017RScience}{}%
+Grolemund, Garrett, and Hadley Wickham. 2017. \emph{R for Data Science}.
+O'Reilly Media.
+
+\leavevmode\hypertarget{ref-rmarkdown}{}%
+RStudio. 2018. ``R Markdown.''
+\url{https://rmarkdown.rstudio.com/index.html}.
+
+\leavevmode\hypertarget{ref-wright2016RAnalysis}{}%
+Wright, Thomas, and Naupaka Zimmerman, eds. 2016. ``Software Carpentry:
+R for Reproducible Scientific Analysis.''
+\url{https://doi.org/10.5281/zenodo.57520}.
+
+\leavevmode\hypertarget{ref-xie2018RGuide}{}%
+Xie, Yihui, J.J. Allaire, and Garrett Grolemund. 2018. \emph{R Markdown:
+The Definitive Guide}. CRC Press.
+
+
+\end{document}
