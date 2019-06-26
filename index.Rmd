@@ -2,6 +2,7 @@
 title: "Introduction to R Markdown"
 author: "[Shih Ching Fu](mailto:shih.ching.fu@gmail.com)"
 date: "ResBaz Perth 2019"
+bibliography: ref.bib
 output:
   html_document:
     toc: true
@@ -12,16 +13,13 @@ output:
     number_sections: true
     theme: readable
     highlight: haddock
-    fig_width: 7
-    fig_height: 6
-    fig_caption: true
     code_folding: show
-bibliography: ref.bib
+  slidy_presentation: default
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';
   rmarkdown::render(input_file,
- encoding=encoding,
- output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
+  encoding=encoding,
+  output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 ---
 
 ```{r setup, include=FALSE}
@@ -153,7 +151,7 @@ When you knit an R Notebook the `.Rmd` file is sent to `knitr` which executes an
 
 [^pandoc]: pandoc, http://pandoc.org/
 
-![](https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/9791d/images/rmarkdownflow.png)
+![](./rmarkdownflow.png)
 
 The advantage of this two-step workflow is that you can create a wide range of output formats from the same `.Rmd` file. For example, slide presentations, dashboards, websites, and webapps.
 
@@ -225,6 +223,21 @@ S^uperscripting^ is done with carets: `S^uperscripting^`
 S~ubscripting~ is done with tildes: `S~ubscripting~`
 
 ~~Strikethrough~~ is done with double tildes: `~~Strikethrough~~`
+
+### Inline R code
+
+R code can be embedded inline by surrounding it in backticks `` ` `` and inserting a single `r` character prefix. This code is executed and replaced with its output when the notebook is knitted.
+
+~~~
+The `iris` dataset has ``r 'r nrow(iris)'`` rows.
+~~~
+
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+Output:
+
+The `iris` dataset has `r nrow(iris)` rows.
+
+</div></p>
 
 ### $\LaTeX$ equations
 
@@ -470,11 +483,14 @@ Output:
 <p><div class="boxed" style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
 **Exercise 3**
 
-Remember to re-knit the notebook to see your changes.
+Remember to __re-knit__ the notebook to see your changes.
 
 1. Put a horizontal rule underneath the content in your R notebook from Exercise 2 (`my-notebook.Rmd`).
 
-2. Below the rule insert a heading called "Table of Contents"
+2. Below the horizontal rule insert some text with inline R code, e.g., `` Mean sepal width is `r
+mean(iris$Sepal.Length)` ``
+
+2. Insert a heading called "Table of Contents"
 
 3. Under the heading, use an ordered list with nesting to create the outline of a typical scientific report, e.g., Introduction, Data Description, Methodology, etc.
 
@@ -618,7 +634,7 @@ colMeans(iris[,-5])
 
 </div></p>
 
-### The setup chunk {-}
+#### The setup chunk {-}
 
 A special code chunk is one named *setup*. The setup chunk is automatically run just before you run another code chunk. It is useful for loading libraries and other data before proceeding with further analysis. 
 
@@ -634,7 +650,7 @@ data("iris")
 <p><div class="boxed" style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
 **Exercise 6**
 
-1. Duplicate (copy/paste) the code chunk from Exercise 4 but specify a different output option from amongst those mentioned above. Observe the different output in the knitted document.
+1. Duplicate (copy/paste) the code chunk from Exercise 5 but specify a different output option from amongst those mentioned above. Observe the different output in the knitted document.
 
    HINT: instead of manually typing in the output options, RStudio provides a shortcut by clicking the cog icon found in the top right corner of the chunk, near to the *Run Current Chunk* button. 
 
@@ -643,21 +659,6 @@ data("iris")
    In the popup is also a [*Chunk options*](https://yihui.name/knitr/options/) link to the online documentation.
 
 2. Repeat this exercise for the other output options, observing their effect on the knitted output.
-
-</div></p>
-
-### Inline R code
-
-R code can be embedded inline by surrounding it in backticks `` ` `` and inserting a single `r` character prefix. This code is executed and replaced with its output when the notebook is knitted.
-
-~~~
-The `iris` dataset has ``r 'r nrow(iris)'`` rows.
-~~~
-
-<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
-Output:
-
-The `iris` dataset has `r nrow(iris)` rows.
 
 </div></p>
 
@@ -683,7 +684,7 @@ boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3), main="Iris sepa
 We can resize and align the plot using the `fig.height` and `fig.width` chunk options.
 
 ````
-```{r sepal width boxplot echo=FALSE, fig.height=4, fig.width=4} `r ''`
+```{r sepal width boxplot echo=FALSE, fig.height=4, fig.width=6} `r ''`
 boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3))
 ```
 ````
@@ -691,7 +692,7 @@ boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3))
 <p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
-```{r echo=FALSE, fig.height=4, fig.width=4}
+```{r echo=FALSE, fig.height=4, fig.width=6}
 boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3), main="Iris sepal widths")
 ```
 
@@ -704,6 +705,22 @@ Other useful options include:
 * `fig.align`: align figure to left, right, or centre of page
 
 See <https://yihui.name/knitr/options/#plots> for an extensive list.
+
+<p><div class="boxed" style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
+**Exercise 7**
+
+Check the results of these exercises by re-running the edited code chunk and re-knitting the whole notebook.
+
+1. Duplicate the code chunk of one of the figures in your notebook (remember to rename it if necessary) and use the `fig.asp` figure option to set its aspect ratio to be square, i.e., 1:1.
+
+2. Use the `fig.align` option on the above figure to centre it on the page.
+
+3. On a fresh duplicate of the original figure, use `fig.dim` to resize the figure to a width of 4 inches and height of 6 inches.
+
+   HINT: You may need to check the online documentation mentioned above.
+
+</div></p>
+
 
 ## YAML Header
 
@@ -744,7 +761,7 @@ output:
 ---
 ~~~
 
-### HTML document settings {-}
+#### HTML document settings {-}
 
 For this lesson we have focussed on knitting HTML documents (`html_document` output type). There are many settings available as illustrated by the YAML header used in the `.Rmd` file for this lesson:
 
@@ -753,6 +770,7 @@ For this lesson we have focussed on knitting HTML documents (`html_document` out
 title: "Introduction to R Markdown"
 author: "[Shih Ching Fu](mailto:shih.ching.fu@gmail.com)"
 date: "ResBaz Perth 2019"
+bibliography: ref.bib
 output:
   html_document:
     toc: true
@@ -763,11 +781,8 @@ output:
     number_sections: true
     theme: readable
     highlight: haddock
-    fig_width: 7
-    fig_height: 6
-    fig_caption: true
     code_folding: show
-bibliography: ref.bib
+  slidy_presentation: default
 ---
 ~~~
 
@@ -788,10 +803,21 @@ bibliography: ref.bib
 ---
 ~~~
 
+Here's a sample BibTex record from the `ref.bib` file:
+
+~~~
+@book{xie2018RGuide, 
+      author = "Yihui Xie and J.J. Allaire and Garrett Grolemund",
+      title = "R Markdown: The Definitive Guide",
+      year = "2018",
+      publisher = "CRC Press",
+      url = "https://bookdown.org/yihui/rmarkdown/"}
+~~~
+
 In-text citations are inserted using the at sign `@` followed by the citation key. 
 
 ~~~
-Part II of @xie2018RGuide describes the various output formats available with R Markdown.`
+Part II of @xie2018RGuide describes the various output formats available with R Markdown.
 ~~~
 
 <p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
@@ -801,11 +827,11 @@ Part II of @xie2018RGuide describes the various output formats available with R 
 
 </div></p>
 
-# Just the beginning...
+# Practise your knitting
 
-There is ***much*** more to R Markdown than what's covered here and really the only way to become familiar is by practising your knitting.
+There is ***much*** more to R Markdown than what's covered here!
 
-The sources mentioned in the bibliography below are a good starting point for further exploration. And a simple Google search turns up example galleries like this <https://yihui.name/knitr/demo/showcase/>.
+The sources mentioned in the bibliography below are good starting points for developing your R Markdown expertise. Gallery pages such as <https://yihui.name/knitr/demo/showcase/> are also a great place to start.
 
 # Bibliography
 
