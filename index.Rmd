@@ -1,13 +1,16 @@
 ---
 title: "Introduction to R Markdown"
-author: "Shih Ching Fu"
+author: "[Shih Ching Fu](mailto:shih.ching.fu@gmail.com)"
 date: "ResBaz Perth 2019"
 output:
   html_document:
     toc: true
-    toc_depth: 2
+    toc_depth: 3
+    toc_float: 
+      collapsed: true
+      smooth_scroll: true
     number_sections: true
-    theme: united
+    theme: readable
     highlight: haddock
     fig_width: 7
     fig_height: 6
@@ -26,15 +29,16 @@ library(knitr)
 data("iris")
 ```
 
-# Welcome #
+# Welcome
 
-During this session you'll get a brief introduction to R Markdown. You'll learn about the basic building blocks of an R Markdown file and learn how to knit one into an HTML notebook using RStudio[^1].
+During this session you'll get a brief introduction to R Markdown. You'll learn about the basic building blocks of an R Markdown file and learn how to knit an HTML notebook using RStudio[^rstudio].
 
-[^1]: RStudio, https://www.rstudio.com/
+[^rstudio]: RStudio, https://www.rstudio.com/
 
-## Learning Objectives ##
 
-The only pre-requisite is having R and RStudio installed on your computer since the needed packages are installed by default. You don’t even need to know much R programming!
+## Learning Objectives
+
+The only pre-requisite is having R and RStudio installed on your computer since the needed packages are installed by default. You don’t really need to know much R programming to produce professionally marked up documents.
 
 After completing this lesson you should be able to:
 
@@ -44,7 +48,8 @@ After completing this lesson you should be able to:
 
 3. Know where to get further information on more advanced R Markdown usage.
 
-## Source materials ##
+
+## Source materials
 
 The materials for this lesson are derived heavily from the following sources which are excellent resources in their own right:
 
@@ -57,145 +62,139 @@ The materials for this lesson are derived heavily from the following sources whi
 * [R Markdown](https://rmarkdown.rstudio.com/lesson-1.html) [@rmarkdown]
 
 
-## Why use R Markdown? ##
+## Why use R Markdown?
 
-As an analyst you'll forever be compiling reports to document your methods and findings. These reports will no doubt contain a mixture of word explanations, tables, and figures. From a productivity perspective wouldn't it be really efficient if you could draft your reports in a single electronic artefact rather than copying and pasting between numerous documents? Furthermore, from a reproducible research perspective wouldn't it be extremely valuable if collaborators or colleagues (or sceptics) could take your data, code, and text, and reproduce your exact same figures and results? Well, R Markdown helps with all of this.
+As an analyst you'll regularly prepare reports to document your methods and communicate your findings. And these reports will likely contain a mixture of worded explanations, tables of data, and graphical figures. R Markdown, via the `knitr`[^knitr] package, allows you to embed code into documents so that results such as graphs and figures may be interleaved directly amongst explanatory text in the one source file. Should you wish to change some text or fix an error, at the click of a button you could recompile a new `.HTML`, `.PDF`, or `.DOCX` report.
 
-R Markdown, via the `knitr`[^2] package, allows you to embed code into documents so that results such as graphs and figures may be interleaved directly amongst explanatory text. Should you wish to change some text or fix an error, a new document can be recompiled at the click of a button. Furthermore, these output documents may be in various file formats including `.HTML`, `.PDF`, `.DOCX`.
+Aside from the convenience of not needing to copy-paste between different source documents, your R Notebook fully encapulates your work and is easily shareable as reproducible research [@peng2014TheImportant]. By sharing your R Notebook with collaborators or colleagues (or sceptics) they could take your data, code, and text, and reproduce the exact same analysis as you conducted.
 
-[^2]: knitr, http://yihui.name/knitr/
+[^knitr]: knitr, http://yihui.name/knitr/
 
 According to @grolemund2017RScience, R Markdown files are designed for use in three ways:
 
-1. Communicating to decision makers, focusing on conclusions rather than the code behind the analysis.
+1. Communicating to decision makers who focus on conclusions rather than the code behind the analysis.
 
 2. Collaborating with other analysts who are interested in both your conclusions and how you reached them.
 
-3. As an environment in which to do analysis, as a modern day lab notebook where you can capture not only what you did, but also what you were thinking at the time.
+3. As an environment in which to do analysis, as a modern day lab notebook where you can capture both what you did and what you were thinking at the time.
 
-# R Notebook Basics #
 
-## Creating an R Notebook ##
+# R Notebook Usage
 
-RStudio includes all that you need to get started with creating an R Notebook. The steps below create a new R Notebook with file extension `.Rmd` that RStudio populates with some basic R Markdown content.
+## Creating an R Notebook
+
+RStudio includes all that you need to get started with creating an R Notebook. The steps below create a new (HTML) notebook with file extension `.Rmd` which RStudio populates with some basic R Markdown content.
 
 1. Launch RStudio
 
 2. Click *File* menu
 
-3. Click *New File* $\blacktriangleright$ *R Notebook*
+3. Click *New File* $\blacktriangleright$ *R Markdown...*
 
-   ![](./createnewrnotebook.png)
+   ![](./createnewrmarkdown.png)
 
-<p><div class="boxed"><div style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
+4. Choose *Document* from the list and enter "My Notebook" and your name into the *Title* and *Author* fields respectively.
+
+   ![](./newmarkdowndialog.png)
+
+5. Leave the *Default Output Format* as HTML and click *OK*.
+
+You can already see that R Markdown can be processed into various output types and formats, e.g., PDF Document, HTML slide presentation.
+
+<p><div class="boxed" style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
 **Exercise 1**
 
-1. Create a new RStudio project, call it `intro-to-rmd`.
+1. Create a new RStudio project called `my-project`.
 
-2. Create a new R Notebook.
+2. Create a new R Notebook entitled "My Notebook" with a *Default Output Format* of HTML.
 
 3. Save the notebook as `my-notebook.Rmd`.
 
-4. Identify the YAML header, formatted text, and the 'code chunk'.
+   ![](./mynotebook.png)
+
+4. Identify the YAML header, formatted text, and any 'code chunks'.
 
 </div></p>
 
-## Knitting an R Notebook ##
+## Structure of `.Rmd` files
 
-When you knit an R Notebook the `.Rmd` file is sent to `knitr` which executes any included R code and creates an intermediate Markdown `.md` document containing that code and its output. The `.md` file is then processed by `pandoc`[^3] which is responsible for creating the finished file. 
+From the exercise above, you'll have observed that an R Markdown `.Rmd` file has three components. We shall go into more details later but briefly,
 
-[^3]: pandoc, http://pandoc.org/
++ **Formatted text**
+
+  Prose related to the presented analysis and results.
+
++ **Code chunks**
+
+  Executable R code producing outputs for embedding into the final document.
+
++ **YAML header**
+
+  Settings related to the generation of the final output document.
+
+
+## Running R code chunks
+
+Run a code chunk by clicking the *Run Current Chunk* button within the chunk or by placing your cursor inside it and pressing *Ctrl + Shift + Enter*.
+
+![](./runchunk.png)
+
+The output of the code chunk is displayed within the notebook inside the editor pane.
+
+You can clear this output but clicking on the small cross icon found in the top right corner of the chunk output. There are also icons to pop-out its own window or hide it inline.
+
+![](./clearchunkoutput.png)
+
+## Knitting an R Notebook
+
+'Knitting' an R Notebook refers to compiling it into an output document.
+
+When you knit an R Notebook the `.Rmd` file is sent to `knitr` which executes any code chunks and creates an intermediate Markdown `.md` document. This `.md` file, containing both the code and its output, is processed by `pandoc`[^pandoc] into the finished file. 
+
+[^pandoc]: pandoc, http://pandoc.org/
 
 ![](https://d33wubrfki0l68.cloudfront.net/61d189fd9cdf955058415d3e1b28dd60e1bd7c9b/9791d/images/rmarkdownflow.png)
 
-The advantage of this two step workflow is that you can create a wide range of output formats from the same `.Rmd` file. For example,  slide presentations, dashboards, websites, and webapps.
+The advantage of this two-step workflow is that you can create a wide range of output formats from the same `.Rmd` file. For example, slide presentations, dashboards, websites, and webapps.
 
 To knit a notebook in RStudio, click the *Knit* button found in the toolbar of the source editor pane, or use the keyboard shortcut *Ctrl + Shift + K*.
 
 ![](./knitnotebook.png)
 
-A preview of the knitted document will appear in its own window (or depending on settings, in the *Viewer* pane). You can specified your preferred preview location by clicking the white cog button and choosing *Preview in Window* or *Preview in Viewer Pane*.
+A preview of the knitted document will appear in its own window (or depending on your RStudio settings, in the *Viewer* pane). 
+
+Set your preferred preview location by clicking the white cog button and choosing *Preview in Window* or *Preview in Viewer Pane*.
 
 ![](./previewinviewer.png)
 
-If you are knitting to an HTML notebook, there is a *Preview Notebook* button instead of a *Knit* button. *Preview Notebook* shows you a rendered HTML copy of the contents of the editor but unlike *Knit*, *Preview Notebook* __does not__ run any R code. Instead it reuses the output from when the code was last executed.
+### Previewing an HTML *Notebook* {-}
 
-<p><div class="boxed"><div style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
+If the output type specified in the YAML header is `html_notebook` (rather than `html_document` as above) a *Preview Notebook* button appears instead of a *Knit* button. *Preview Notebook* shows you a rendered HTML copy of the contents of the editor without first executing any R code. It only renders whatever results are already shown in the editor pane.
+
+<p><div class="boxed" style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
 **Exercise 2**
 
 1. Knit to HTML the notebook `my-notebook.Rmd` that you created in Exercise 1.
 
-2. Observe the correspondence between the R Markdown and the resultant document.
+2. Observe the correspondence between the R Markdown and the resultant document. In particular the R code embedded in 'code chunks' (discussed later).
 
-3. Make some changes to the `.Rmd` file and re-knit the document.
+3. Make some changes to the `.Rmd` file and re-knit the document, e.g., delete some text, add `head(cars)` or `str(cars)` to the existing code chunk.
 
 4. Confirm that you see your changes reflected in the finished document.
 
-TIP: Use the keyboard shortcut *Ctrl + Shift + K* to save and knit the notebook in one action.
+TIP: Use the keyboard shortcut *Ctrl + Shift + K* to save and knit a notebook in a single action.
 
 </div></p>
 
 
-## Structure of an R Markdown file ##
+# R Markdown Syntax
 
-An R Markdown `.Rmd` file has three components:
+## Formatted Text
 
-+ Formatted text
+Text in `.Rmd` files is written in Pandoc's Markdown whose syntax is designed to be human-readable and suggestive of its final HTML rendering. The styled text must be enclosed by a special character. 
+Below are the most common styles you'll be using in R Notebooks.
 
-+ Code chunks
-
-+ YAML header
-
-
-# Formatted Text #
-
-Text in `.Rmd` files is written in Pandoc's Markdown[^4] whose syntax is designed to be human-readable and suggestive of its final HTML rendering. The styled text must be pre- and suffixed by a special character. Below are the most common styles you'll be using in R Notebooks.
-
-[^4]: Pandoc's Markdown, https://pandoc.org/MANUAL.html#pandocs-markdown
-
-## Inline text styles ##
-
-*Italic* styling is done with single asterisks or underscores: `*italic*` or `_italic_`
-
-**Bold** styling is done with double asterisks or underscores: `**bold**` or  `__bold__`
-
-***Bold & italic*** styling is done with triple asterisks or underscores: `***bold & italic***` or  `___bold & italic___`
-
-`Inline code` styling is done with single backticks: `` `plot(iris)` ``
-
-S^uperscripting^ is done with carets: `S^uperscripting^`
-
-S~ubscripting~ is done with tildes: `S~ubscripting~`
-
-~~Strikethrough~~ is done with double tildes: `~~Strikethrough~~`
-
-## $\LaTeX$ equations ##
-
-Surrounding an expression with dollar symbols `$` will make R Markdown interpret it as in-line $\LaTeX$ formatting. 
-
-~~~
-$\sum_{n=1}^{\infty} 2^{-n} = 1$
-~~~
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
-Output:
-
-$\sum_{n=1}^{\infty} 2^{-n} = 1$
-</div></p>
-
-
-Using double dollar symbols `$$` will centre the equation on its own line. 
-
-~~~
-$$\sum_{n=1}^{\infty} 2^{-n} = 1$$
-~~~
-
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
-Output:
-
-$$\sum_{n=1}^{\infty} 2^{-n} = 1$$
-</div></p>
-
-## Headings ##
+### Headings
 
 Headings are specified using hash `#` prefixes.
 
@@ -211,58 +210,50 @@ Headings are specified using hash `#` prefixes.
 ### Level 3 heading
 ~~~
 
+### Inline text styles
 
-## Unordered Lists ##
+*Italic* styling is done with single asterisks or underscores: `*italic*` or `_italic_`
 
-Items of an unordered list are prefixed with an asterisk `*`, hyphen `-`, or plus `+`. Inserting extra carriage returns spaces out the bullet points and tab stops nests bullet points.
+**Bold** styling is done with double asterisks or underscores: `**bold**` or  `__bold__`
+
+***Bold & italic*** styling is done with triple asterisks or underscores: `***bold & italic***` or  `___bold & italic___`
+
+`Inline code` styling is done with single backticks: `` `plot(iris)` ``
+
+S^uperscripting^ is done with carets: `S^uperscripting^`
+
+S~ubscripting~ is done with tildes: `S~ubscripting~`
+
+~~Strikethrough~~ is done with double tildes: `~~Strikethrough~~`
+
+### $\LaTeX$ equations
+
+Surrounding an expression with dollar symbols `$` will make R Markdown interpret it as in-line $\LaTeX$ formatting. 
 
 ~~~
-* Item 1
-
-* Item 2
-    * Item 2a
-    * Item 2b
+Sum of negative integer powers of 2 is $\sum_{n=1}^{\infty} 2^{-n} = 1$
 ~~~
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
-* Item 1
-
-* Item 2
-    * Item 2a
-    * Item 2b
-
+Sum of negative integer powers of 2 is $\sum_{n=1}^{\infty} 2^{-n} = 1$
 </div></p>
 
-## Ordered Lists ##
 
-Ordered lists are prefixed with numbers or letters. Notice that the numbering is incremented automatically in the output even if typed out of order.
+Using double dollar symbols `$$` will centre the equation on its own line. 
 
 ~~~
-1. First ordered list item
-2. Second ordered list item
-    a. First nested ordered list item
-    
-    a. Second nested ordered list item
-    
-1. Third ordered list item
+Sum of negative integer powers of 2 is $$\sum_{n=1}^{\infty} 2^{-n} = 1$$
 ~~~
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
-1. First ordered list item
-2. Second ordered list item
-    a. First nested ordered list item
-    
-    a. Second nested ordered list item
-    
-1. Third ordered list item
-
+Sum of negative integer powers of 2 is $$\sum_{n=1}^{\infty} 2^{-n} = 1$$
 </div></p>
 
-## Links ##
+### Links
 
 Clickable URLs are inserted by enclosing the URL in greater-than `<` and less-than `>` symbols. 
 
@@ -270,7 +261,7 @@ Clickable URLs are inserted by enclosing the URL in greater-than `<` and less-th
 <http://example.com>
 ~~~
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 <http://example.com>
@@ -283,38 +274,40 @@ Custom anchor text is enclosed in square parentheses `[]` followed by the URL in
 [hypertext link](http://example.com)
 ~~~
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 [hypertext link](http://example.com)
 </div></p>
 
-## Footnotes ##
+### Footnotes
 
-You can insert hyperlinked footnotes using square bracket and caret syntax `[^ ]`.
+You can insert hyperlinked footnotes using square bracket and caret syntax `[^noteID]`. The note ID can be any string of characters without spaces. 
+
+The numbering of footnotes is done automatically upon knitting.
 
 ~~~
-Statisticians use the AIC[^5] to evaluate relative quality between models.
+Statisticians use the AIC[^aic] to evaluate relative quality between models.
 ~~~
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
-Statisticians use the AIC[^5] to evaluate relative quality between models.
+Statisticians use the AIC[^aic] to evaluate relative quality between models.
 
 </div></p>
 
-The definition of the footnote must appear in the R Notebook someplace _after_ it is first mentioned in the text. Notice the colon `:` in the syntax.
+The definition of the footnote must appear in the R Notebook somewhere _after_ it is first mentioned in the text. Notice the colon `:` in the syntax.
 
 ~~~
-[^5]: AIC stands for Akaike Information Criterion
+[^aic]: AIC stands for Akaike Information Criterion
 ~~~
 
-[^5]: AIC stands for Akaike Information Criterion
+[^aic]: AIC stands for Akaike Information Criterion
 
 The footnote itself appears at the end of the HTML document with a convenient hyperlink back to where it appears in the document body.
 
-## Images ##
+### Images
  
 Images are inserted by providing a file path to the image, either a link to a locally stored file or a URL to an image hosted online. Notice the leading exclamation mark `!` and caption in square parentheses `[]`. Leave the square parentheses empty for no caption.
 
@@ -322,15 +315,90 @@ Images are inserted by providing a file path to the image, either a link to a lo
 ![Optional caption: Curtin University logo](https://global.curtin.edu.au/responsive-assets/img/logo-curtin-university.png)
 ~~~
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ![Optional caption: Curtin University logo](https://global.curtin.edu.au/responsive-assets/img/logo-curtin-university.png)
 </div></p>
 
-## Tables ##
+### Unordered Lists
 
-You can manually create a text table by using hyphens `-` and pipes `|` to insert horizontal grid-lines and delineate columns, respectively. Rows are ended with a carriage return. It is a bit tricky though!
+Items of an unordered list are prefixed with an asterisk `*`, hyphen `-`, or plus `+`. Extra carriage returns inserts space between bullet points and nest a bullet point by inserting four blank spaces before it.
+
+~~~
+* An item
+
+* Another item
+    * Nested item
+    * Another nested item
+~~~
+
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+Output:
+
+* An item
+
+* Another item
+    * Nested item
+    * Another nested item
+
+</div></p>
+
+### Ordered Lists
+
+Ordered lists are prefixed with numbers or letters. 
+
+Notice that the numbering is incremented automatically in the output even if typed out of order.
+
+~~~
+1. First item
+2. Second item
+    a. First nested item
+    
+    a. Second nested item
+    
+1. Third item
+~~~
+
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+Output:
+
+1. First item
+2. Second item
+    a. First nested item
+    
+    a. Second nested item
+    
+1. Third item
+
+</div></p>
+
+### Block quotations
+
+Block quotations are created by prefixing each line with the greater-than symbol `<`.
+
+~~~
+> First level of quoting
+>
+> > Nested block quotation
+>
+> Back to the first level
+~~~
+
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+Output:
+
+> First level of quoting
+>
+> > Nested block quotation
+>
+> Back to the first level
+
+</div></p>
+
+### Tables
+
+Manually create a static table using hyphens `-` and pipes `|` to indicate a header row and columns respectively. Rows are ended with a carriage return.
 
 ~~~
 First Header  | Second Header | Third Header
@@ -339,7 +407,7 @@ Cell content  | Cell content  | Cell content
 Cell content  | Cell content  | Cell content
 ~~~
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 First Header  | Second Header | Third Header
@@ -349,14 +417,16 @@ Cell content  | Cell content  | Cell content
 
 </div></p>
 
-If the output of a code chunk is a table of values, R Markdown will render a table accordingly.
+#### Tabular code output {-}
+
+If the output of a code chunk is a table of values, R Markdown will render it accordingly.
 
 ````
 ```{r}`r ''`
 head(iris)
 ```
 ````
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ```{r}
@@ -373,7 +443,7 @@ kable(head(iris))
 ```
 ````
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ```{r}
@@ -382,30 +452,7 @@ kable(head(iris))
 
 </div></p>
 
-## Block quotations ##
-
-Block quotations are created by prefixing each line with the greater-than symbol `<`.
-
-~~~
-> First level of quoting
->
-> > Nested block quote
->
-> Back to the first level
-~~~
-
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
-Output:
-
-> First level of quoting
->
-> > Nested block quote
->
-> Back to the first level
-
-</div></p>
-
-## Horizontal rule ##
+### Horizontal rules
 
 Horizontal rules are inserted using three or more consecutive asterisks `*` (or hyphens `-`).
 
@@ -413,15 +460,17 @@ Horizontal rules are inserted using three or more consecutive asterisks `*` (or 
 ---
 ~~~
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ---
 
 </div></p>
 
-<p><div class="boxed"><div style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
+<p><div class="boxed" style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
 **Exercise 3**
+
+Remember to re-knit the notebook to see your changes.
 
 1. Put a horizontal rule underneath the content in your R notebook from Exercise 2 (`my-notebook.Rmd`).
 
@@ -437,16 +486,16 @@ Output:
 
 </div></p>
 
-<p><div class="boxed"><div style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
+<p><div class="boxed" style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
 **Exercise 4 (Optional)**
 
 1. Use $\LaTeX$ syntax to add to your notebook the equation for Pythagoras' theorem or Euler's identity.
 
 </div></p>
 
-# Code Chunks #
+## Code Chunks
 
-Code is inserted into R Notebooks as 'code chunks'. Upon knitting, these chunks are executed and their results inserted directly into the finished document. Embedding code alongside prose annotations of your methods and results speaks to the ethos of reproducible research.
+Code is inserted into R Notebooks in 'code chunks'. Upon knitting, these chunks are executed and their results inserted directly into the finished document. Embedding code alongside prose annotations of your methods and results speaks to the ethos of reproducible research.
 
 Code chunks are enclosed by three backticks `` ``` `` followed by curly parentheses `{}` containing various parameters for that chunk. 
 
@@ -457,7 +506,7 @@ str(iris)
 ```
 ````
 
-The first parameter `r` indicates that the chunk contains R code. `knitr` provides support for many other languages such as Bash, Perl, SQL, Python, and Julia. 
+In this example the first parameter `r` indicates that the chunk contains R code. `knitr` provides support for many other languages such as Bash, Perl, SQL, Python, and Julia. 
 
 After the `r` is an optional name for this chunk. This helps with finding the chunk in the code navigator found in the bottom left of the editor pane.
 
@@ -465,7 +514,7 @@ After the `r` is an optional name for this chunk. This helps with finding the ch
 
 The knitted notebook will therefore include both the code and its output one after the other.
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ```{r Structure of iris dataset}
@@ -474,26 +523,34 @@ str(iris)
 
 </div></p>
 
-<p><div class="boxed"><div style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
+<p><div class="boxed" style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
 **Exercise 5**
 
 1. Add a new R chunk by clicking in your notebook where you want to insert the chunk and clicking the *Insert* button on the toolbar. Alternatively (and preferably) use the *Ctrl + Alt + I* keyboard shortcut.
    
    ![](./insertrchunk.png)
 
-2. Add the following code into the chunk `summary(iris)`.
+2. Name this chunk "summary iris" and confirm that name appears in the code chunk navigation menu.
 
-3. Run the chunk by clicking the *Run Current Chunk* button within the chunk or by placing your cursor inside it and pressing *Ctrl + Shift + Enter*. 
+3. Add this R code into the chunk: `summary(iris)`.
+
+4. Run the chunk by clicking the *Run Current Chunk* button or by pressing *Ctrl + Shift + Enter*. 
    
    ![](./runchunk.png)
 
+4. Insert and run a couple more code chunks with R code of your choosing. 
+
+5. Knit your notebook to HTML and check that the output is as you expect.
+
 </div></p>
 
-## Chunk options ##
+### Chunk options
 
-Inside the curly parentheses `{}` that precede a code chunk we can specify options that affect how the results are knitted into the final document. We shall only cover a handful of options here and full documentation is found at <https://yihui.name/knitr/options>. 
+You can specify in the curly parentheses `{}` further options that affect how a chunk is knitted into the final document. Only a few common examples are show below.
 
-*a) Show the code and the output*
+See <https://yihui.name/knitr/options> for a full list of options.
+
+*a) Show the code and the output (default)*
 
 ````
 ```{r}`r ''`
@@ -501,7 +558,7 @@ colMeans(iris[,-5])
 ```
 ````
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ```{r}
@@ -518,7 +575,7 @@ colMeans(iris[,-5])
 ```
 ````
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ```{r, eval=FALSE}
@@ -535,7 +592,7 @@ colMeans(iris[,-5])
 ```
 ````
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ```{r, echo=FALSE}
@@ -552,7 +609,7 @@ colMeans(iris[,-5])
 ```
 ````
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ```{r, include=FALSE}
@@ -561,11 +618,11 @@ colMeans(iris[,-5])
 
 </div></p>
 
-### Setup Chunk
+### The setup chunk {-}
 
-A special code chunk is one named the *setup* chunk. This named chunk is executed automatically whenever you execute another code chunk. It is useful for loading libraries and other data before proceeding with further analysis. 
+A special code chunk is one named *setup*. The setup chunk is automatically run just before you run another code chunk. It is useful for loading libraries and other data before proceeding with further analysis. 
 
-Notice the `include=FALSE` chunk option which sets this code chunk to execute but not produce any output.
+The `include=FALSE` option prevents the setup chunk from inserting any output into the knitted document.
 
 ````
 ```{r setup, include=FALSE} `r ''`
@@ -574,46 +631,47 @@ data("iris")
 ```
 ````
 
-<p><div class="boxed"><div style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
+<p><div class="boxed" style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
 **Exercise 6**
 
 1. Duplicate (copy/paste) the code chunk from Exercise 4 but specify a different output option from amongst those mentioned above. Observe the different output in the knitted document.
 
-   HINT: instead of manually typing in the output options, RStudio provides a shortcut by clicking the cog icon found in the top right corner of the chunk, near to the *Run* button. 
+   HINT: instead of manually typing in the output options, RStudio provides a shortcut by clicking the cog icon found in the top right corner of the chunk, near to the *Run Current Chunk* button. 
 
    ![](./chunkoptions.png)
 
-   Notice the [*Chunk options*](https://yihui.name/knitr/options/) link to online documentation of the available options.
+   In the popup is also a [*Chunk options*](https://yihui.name/knitr/options/) link to the online documentation.
 
-2. Repeat for the other output options and observe their effects on the knitted document.
+2. Repeat this exercise for the other output options, observing their effect on the knitted output.
 
 </div></p>
 
-## Inline R code ##
+### Inline R code
 
-R code can be embedded inline with formatted text and be executed upon knitting.
+R code can be embedded inline by surrounding it in backticks `` ` `` and inserting a single `r` character prefix. This code is executed and replaced with its output when the notebook is knitted.
 
-```The `iris` dataset has `r
-nrows(iris)` rows.```
+~~~
+The `iris` dataset has ``r 'r nrow(iris)'`` rows.
+~~~
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 The `iris` dataset has `r nrow(iris)` rows.
 
 </div></p>
 
-## Figure options ##
+### Figure options
 
-All the aforementioned code chunks only had numerical outputs. Here is an example of a chunk that produces a boxplot of the iris dataset, split by species.
+All the aforementioned code chunks had only numerical outputs. Here is an example of a chunk that produces a figure, namely a boxplot of sepal widths from the `iris` dataset split by species.
 
 ````
-```{r sepal width boxplot, echo=FALSE}`r ''`
+```{r sepal width boxplot, echo=FALSE} `r ''`
 boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3))
 ```
 ````
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ```{r sepal width boxplot, echo=FALSE}
@@ -622,15 +680,15 @@ boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3), main="Iris sepa
 
 </div></p>
 
-We can resize and align the plot using the `fig.height`, `fig.width=`, and `fig.align` chunk options.
+We can resize and align the plot using the `fig.height` and `fig.width` chunk options.
 
 ````
-```{r echo=FALSE, fig.height=4, fig.width=4}`r `''`
+```{r sepal width boxplot echo=FALSE, fig.height=4, fig.width=4} `r ''`
 boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3))
 ```
 ````
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ```{r echo=FALSE, fig.height=4, fig.width=4}
@@ -645,14 +703,15 @@ Other useful options include:
 * `fig.dim`: specify height and width as a tuple
 * `fig.align`: align figure to left, right, or centre of page
 
+See <https://yihui.name/knitr/options/#plots> for an extensive list.
 
-# YAML Header #
+## YAML Header
 
-At the top of a `.Rmd` file is the YAML[^6] header enclosed by triple hyphens `---`. It specifies settings that affect the entire document, in particular the output type.
+At the top of a `.Rmd` file is the YAML[^yaml] header enclosed by triple hyphens `---`. It specifies settings that affect the entire document, in particular the output type.
 
-[^6]: YAML stands for Yet Another Markup Language
+[^yaml]: YAML stands for Yet Another Markup Language
 
-The default YAML header inserted by RStudio sets the R Markdown file to knit to an HTML notebook.
+Below is the default YAML header inserted by RStudio which sets a R Markdown file to knit to an HTML notebook.
 
 ~~~
 ---
@@ -661,15 +720,15 @@ output: html_notebook
 ---
 ~~~
 
-Other document output types include HTML document (distinct from HTML *notebook*), PDF, and Word. Note that PDF output requires $\LaTeX$ to be installed.
+Other document output types include  PDF, Word, and HTML documents (distinct from HTML *notebook*). Note that PDF output requires $\LaTeX$ to be installed and Word output requires Microsoft Word (or equivalent) for previewing.
 
 ~~~
 ---
-title: "R Notebook"
+title: "R Document"
 output:
-  html_document: default
   pdf_document: default
   word_document: default
+  html_document: default
 ---
 ~~~
 
@@ -677,7 +736,7 @@ Alternatively, you can produce a slideshow using `beamer`, `ioslides`, or `slidy
 
 ~~~
 ---
-title: "R Presentation"
+title: "R Slideshow"
 output:
   beamer_presentation: default
   ioslides_presentation: default
@@ -685,24 +744,24 @@ output:
 ---
 ~~~
 
-## HTML document settings ##
+### HTML document settings {-}
 
-For this lesson we shall focus upon knitting HTML documents for which there are many settings that we can set in the YAML header. Here is the YAML header for the `.Rmd` file that produced this HTML document.
+For this lesson we have focussed on knitting HTML documents (`html_document` output type). There are many settings available as illustrated by the YAML header used in the `.Rmd` file for this lesson:
 
 ~~~
 ---
 title: "Introduction to R Markdown"
-author: "Shih Ching Fu"
+author: "[Shih Ching Fu](mailto:shih.ching.fu@gmail.com)"
 date: "ResBaz Perth 2019"
 output:
   html_document:
     toc: true
+    toc_depth: 3
     toc_float: 
-      collapsed: false
+      collapsed: true
       smooth_scroll: true
-    toc_depth: 2
     number_sections: true
-    theme: united
+    theme: readable
     highlight: haddock
     fig_width: 7
     fig_height: 6
@@ -712,10 +771,11 @@ bibliography: ref.bib
 ---
 ~~~
 
+See Part II of @xie2018RGuide for full details of the options for various output types.
 
-## Create a bibliography and citations ##
+## Bibliographies
 
-R Markdown supports citing from bibliographies in common format such as BibTeX, BibLaTeX, and EndNote. The path to the bibliography file must be specified in the YAML header against the `bibliography` field.
+R Markdown supports common bibliography formats such as BibTeX, BibLaTeX, and EndNote. The path to the bibliography file must be specified in the YAML header under the `bibliography` field.
 
 ~~~
 ---
@@ -728,18 +788,24 @@ bibliography: ref.bib
 ---
 ~~~
 
-Citing a reference uses the `@` symbol. 
+In-text citations are inserted using the at sign `@` followed by the citation key. 
 
 ~~~
 Part II of @xie2018RGuide describes the various output formats available with R Markdown.`
 ~~~
 
-<p><div class="boxed"><div style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
+<p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 Part II of @xie2018RGuide describes the various output formats available with R Markdown.
 
 </div></p>
 
-# Bibliography #
+# Just the beginning...
+
+There is ***much*** more to R Markdown than what's covered here and really the only way to become familiar is by practising your knitting.
+
+The sources mentioned in the bibliography below are a good starting point for further exploration. And a simple Google search turns up example galleries like this <https://yihui.name/knitr/demo/showcase/>.
+
+# Bibliography
 
