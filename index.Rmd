@@ -64,7 +64,7 @@ The materials for this lesson are derived heavily from the following places whic
 
 As an analyst you'll regularly prepare reports to document your methods and communicate your findings. And these reports will likely contain a mixture of worded explanations, tables of data, and graphical figures. An R Markdown file, via the `knitr`[^knitr] package, allows you to embed code for generating graphs and figures amongst other explanatory text all within the one source file. Should you wish to change some text or fix an error, at the click of a button you can recompile a new `.HTML`, `.PDF`, or `.DOCX` report immediately.
 
-Aside from the convenience of not needing to copy and paste between different source documents, an R Notebook fully encapulates your work and is easily shareable as reproducible research [@peng2014TheImportant]. By sharing your R Notebook with collaborators or colleagues (or even sceptics!) they can take your data, code, and text, and reproduce the exact same analysis as you conducted.
+Aside from the convenience of not needing to copy and paste between different source documents, an R Notebook fully encapsulates your work and is easily shareable as reproducible research [@peng2014TheImportant]. By sharing your R Notebook with collaborators or colleagues (or even sceptics!) they can take your data, code, and text, and reproduce the exact same analysis as you conducted.
 
 [^knitr]: knitr, http://yihui.name/knitr/
 
@@ -225,7 +225,7 @@ S^uperscripting^ is applied using carets: `S^uperscripting^`
 
 S~ubscripting~ is applied using tildes: `S~ubscripting~`
 
-~~Strikethrough~~ is appied using double tildes: `~~Strikethrough~~`
+~~Strikethrough~~ is applied using double tildes: `~~Strikethrough~~`
 
 ### Inline R code
 
@@ -340,7 +340,7 @@ Output:
 
 ### Unordered Lists
 
-Items of an unordered list are prefixed with an asterisk `*`, hyphen `-`, or plus `+`. Increase the line spacing between bullet points by adding extra carriage returns and nest bullet points by prepending them with four blank spaces.
+Items of an unordered list are prefixed with an asterisk `*`, hyphen `-`, or plus `+`. Increase the line spacing between bullet points by adding extra carriage returns and nest bullet points by prepending four blank spaces.
 
 ~~~
 * An item
@@ -517,7 +517,7 @@ mean(iris$Sepal.Length)` ``
 
 Code is inserted into R Notebooks in 'code chunks'. Upon knitting, these chunks are executed and their results inserted directly into the finished document. Embedding code alongside prose annotations of your methods and results speaks to the ethos of reproducible research.
 
-Code chunks are enclosed by three backticks `` ``` `` followed by curly parentheses `{}` containing comma-seperated parameters for that chunk (if any). 
+Code chunks are enclosed by three backticks `` ``` `` followed by curly parentheses `{}` containing comma-separated parameters for that chunk (if any). 
 
 ````
 ```{r Structure of iris dataset}`r ''`
@@ -813,7 +813,7 @@ bibliography: ref.bib
 ---
 ~~~
 
-Here's a sample BibTex record from the `ref.bib` file:
+Here's a sample BibTeX record from the `ref.bib` file:
 
 ~~~
 @book{xie2018RGuide, 
