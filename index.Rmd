@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R Markdown"
-author: "[Shih Ching Fu](mailto:shih.ching.fu@gmail.com)"
-date: "ResBaz Perth 2019"
+author: "[Shih Ching Fu](https://shihchingfu.com)"
+date: "[ResBaz Perth 2019](https://resbaz.github.io/resbaz2019/perth/)"
 bibliography: ref.bib
 output:
   html_document:
@@ -133,7 +133,7 @@ From the exercise above you'll have observed that an R Markdown `.Rmd` file has 
 
 ## Running R code chunks
 
-Run a code chunk by clicking the *Run Current Chunk* button (green arrow) within the chunk or by placing your cursor inside the chunk and pressing *Ctrl + Shift + Enter*.
+Run a code chunk by clicking the *Run Current Chunk* button (green arrow) within the chunk or by placing your cursor inside the chunk and pressing <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>.
 
 ![](./runchunk.png)
 
@@ -155,7 +155,7 @@ When you knit an R Notebook the `.Rmd` file is sent to `knitr` which executes an
 
 The advantage of this two-step workflow is that you can create a wide range of output formats from the same `.Rmd` file. For example, slide presentations, dashboards, websites, and webapps.
 
-To knit a notebook in RStudio, click the *Knit* button found in the toolbar of the *Source* editor pane, or use the keyboard shortcut *Ctrl + Shift + K*.
+To knit a notebook in RStudio, click the *Knit* button found in the toolbar of the *Source* editor pane, or use the keyboard shortcut <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd>.
 
 <center>
 ![](./knitnotebook.png)
@@ -184,7 +184,7 @@ If the output type specified in the YAML header is `html_notebook` (rather than 
 
 4. Confirm that you can see your changes reflected in the re-knitted document.
 
-TIP: Use the keyboard shortcut *Ctrl + Shift + K* to save and knit a notebook in a single action.
+TIP: Use the keyboard shortcut <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd> to save and knit a notebook in a single action.
 
 </div></p>
 
@@ -549,7 +549,7 @@ str(iris)
 
 1. Add a new R chunk by clicking in your notebook where you want to insert the chunk and clicking the *Insert* button on the toolbar. 
 
-   Alternatively (and preferably) use the *Ctrl + Alt + I* keyboard shortcut.
+   Alternatively (and preferably) use the <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> keyboard shortcut.
    
    ![](./insertrchunk.png)
 
@@ -557,7 +557,7 @@ str(iris)
 
 3. Add this R code into the chunk: `summary(iris)`.
 
-4. Run the chunk by clicking the *Run Current Chunk* button or by pressing *Ctrl + Shift + Enter*. 
+4. Run the chunk by clicking the *Run Current Chunk* button or by pressing <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>. 
    
    ![](./runchunk.png)
 
@@ -691,7 +691,7 @@ boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3), main="Iris sepa
 We can resize and align the plot using the `fig.height` and `fig.width` chunk options.
 
 ````
-```{r sepal width boxplot echo=FALSE, fig.height=4, fig.width=6} `r ''`
+```{r sepal width boxplot echo=FALSE, fig.height=3, fig.width=3} `r ''`
 boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3))
 ```
 ````
@@ -699,7 +699,7 @@ boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3))
 <p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
-```{r echo=FALSE, fig.height=4, fig.width=6}
+```{r echo=FALSE, fig.height=3, fig.width=3}
 boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3), main="Iris sepal widths")
 ```
 
