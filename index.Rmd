@@ -843,5 +843,11 @@ There is ***much*** more to R Markdown than what's covered here!
 
 The sources mentioned in the bibliography below are good starting points for developing your R Markdown expertise. Gallery pages such as <https://yihui.name/knitr/demo/showcase/> are also a great place to start.
 
+Lastly, RStudio has 'cheatsheets' that you can access via the *Help* menu. They are a convenient printable reference of commonly used syntax and commands.
+
+<center>
+![](./cheatsheets.png)
+</center>
+
 # Bibliography
 
