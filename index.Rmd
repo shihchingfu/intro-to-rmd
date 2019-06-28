@@ -69,6 +69,8 @@ Aside from the convenience of not needing to copy and paste between different so
 
 [^knitr]: knitr, http://yihui.name/knitr/
 
+![source: "Piled Higher and Deeper" by Jorge Cham](http://phdcomics.com/comics/archive/phd031214s.gif)
+
 According to @grolemund2017RScience, R Markdown files are designed for use in three ways:
 
 1. Communicating to decision makers who focus on conclusions rather than the code behind your analysis.
