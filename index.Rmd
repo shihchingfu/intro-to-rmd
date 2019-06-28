@@ -33,6 +33,7 @@ During this session you'll get a brief introduction to R Markdown. You'll learn 
 
 [^rstudio]: RStudio, https://www.rstudio.com/
 
+![](http://hexb.in/hexagons/rstudio.png) ![](http://hexb.in/hexagons/rmarkdown.png) ![](http://hexb.in/hexagons/knitr.png)
 
 ## Learning Objectives
 
