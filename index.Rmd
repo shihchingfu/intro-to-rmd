@@ -33,7 +33,9 @@ During this session you'll get a brief introduction to R Markdown. You'll learn 
 
 [^rstudio]: RStudio, https://www.rstudio.com/
 
+<center>
 ![](http://hexb.in/hexagons/rstudio.png) ![](http://hexb.in/hexagons/rmarkdown.png) ![](http://hexb.in/hexagons/knitr.png)
+</center>
 
 ## Learning Objectives
 
@@ -47,7 +49,6 @@ After completing this lesson you should be able to:
 
 3. Know where to get further information on more advanced R Markdown usage.
 
-
 ## Source materials
 
 The materials for this lesson are derived heavily from the following places which are excellent resources in their own right:
@@ -60,7 +61,6 @@ The materials for this lesson are derived heavily from the following places whic
 
 * [R Markdown](https://rmarkdown.rstudio.com/lesson-1.html) [@rmarkdown]
 
-
 ## Why use R Markdown?
 
 As an analyst you'll regularly prepare reports to document your methods and communicate your findings. And these reports will likely contain a mixture of worded explanations, tables of data, and graphical figures. An R Markdown file, via the `knitr`[^knitr] package, allows you to embed code for generating graphs and figures amongst other explanatory text all within the one source file. Should you wish to change some text or fix an error, at the click of a button you can recompile a new `.HTML`, `.PDF`, or `.DOCX` report immediately.
@@ -69,7 +69,11 @@ Aside from the convenience of not needing to copy and paste between different so
 
 [^knitr]: knitr, http://yihui.name/knitr/
 
+<center>
+
 ![source: "Piled Higher and Deeper" by Jorge Cham](http://phdcomics.com/comics/archive/phd031214s.gif)
+
+</center>
 
 According to @grolemund2017RScience, R Markdown files are designed for use in three ways:
 
@@ -78,7 +82,6 @@ According to @grolemund2017RScience, R Markdown files are designed for use in th
 2. Collaborating with other analysts who are interested in *both* your conclusions and how you reached them.
 
 3. As an environment in which to conduct analysis, as a modern day lab notebook where you can capture both what you did and what you were thinking at the time.
-
 
 # R Notebook Usage
 
@@ -138,13 +141,17 @@ From the exercise above you'll have observed that an R Markdown `.Rmd` file has 
 
 Run a code chunk by clicking the *Run Current Chunk* button (green arrow) within the chunk or by placing your cursor inside the chunk and pressing <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>.
 
+<center>
 ![](./runchunk.png)
+</center>
 
 The output of the code chunk is displayed within the notebook inside the *Source* editor pane.
 
 You can clear this output by clicking the *Clear Output* icon (small cross) found in the top right corner of the chunk output. You could also pop-out its own window or hide the output.
 
+<center>
 ![](./clearchunkoutput.png)
+</center>
 
 ## Knitting an R Notebook
 
@@ -154,7 +161,10 @@ When you knit an R Notebook the `.Rmd` file is sent to `knitr` which executes an
 
 [^pandoc]: pandoc, http://pandoc.org/
 
+<center>
 ![source: <https://r4ds.had.co.nz/r-markdown.html>](./rmarkdownflow.png)
+
+</center>
 
 The advantage of this two-step workflow is that you can create a wide range of output formats from the same `.Rmd` file. For example, slide presentations, dashboards, websites, and webapps.
 
