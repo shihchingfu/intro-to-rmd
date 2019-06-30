@@ -4,6 +4,7 @@ author: "[Shih Ching Fu](https://shihchingfu.com)"
 date: "[ResBaz Perth 2019](https://resbaz.github.io/resbaz2019/perth/)"
 bibliography: ref.bib
 output:
+  #slidy_presentation: default
   html_document:
     toc: true
     toc_depth: 3
@@ -14,12 +15,11 @@ output:
     theme: readable
     highlight: haddock
     code_folding: show
-  slidy_presentation: default
-knit: (function(input_file, encoding) {
-  out_dir <- 'docs';
-  rmarkdown::render(input_file,
-  encoding=encoding,
-  output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
+knit: 
+  (function(input_file, encoding) {
+    rmarkdown::render(input_file,
+                      encoding=encoding,
+                      output_file=file.path(dirname(input_file), 'docs', 'index.html'))})
 ---
 
 ```{r setup, include=FALSE}
@@ -90,6 +90,8 @@ According to @grolemund2017RScience, R Markdown files are designed for use in th
 RStudio includes all that you need to get started with creating an R Notebook. The steps below create a new (HTML) notebook with file extension `.Rmd` pre-filled by RStudio with some basic R Markdown content.
 
 1. Launch RStudio
+
+2. (Recommended) Create a new project (*File*, *New Project...*, *New Directory* )
 
 2. Click *File* menu
 
