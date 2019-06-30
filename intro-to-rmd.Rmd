@@ -164,7 +164,7 @@ When you knit an R Notebook the `.Rmd` file is sent to `knitr` which executes an
 [^pandoc]: pandoc, http://pandoc.org/
 
 <center>
-![source: <https://r4ds.had.co.nz/r-markdown.html>](./rmarkdownflow.png)
+![source: @grolemund2017RScience](./rmarkdownflow.png)
 
 </center>
 
@@ -793,10 +793,11 @@ The focus of this lesson is knitting HTML documents (`html_document` output type
 ~~~
 ---
 title: "Introduction to R Markdown"
-author: "[Shih Ching Fu](mailto:shih.ching.fu@gmail.com)"
-date: "ResBaz Perth 2019"
+author: "[Shih Ching Fu](https://shihchingfu.com)"
+date: "[ResBaz Perth 2019](https://resbaz.github.io/resbaz2019/perth/)"
 bibliography: ref.bib
 output:
+  #slidy_presentation: default
   html_document:
     toc: true
     toc_depth: 3
@@ -807,6 +808,11 @@ output:
     theme: readable
     highlight: haddock
     code_folding: show
+knit: 
+  (function(input_file, encoding) {
+    rmarkdown::render(input_file,
+                      encoding=encoding,
+                      output_file=file.path(dirname(input_file), 'docs', 'index.html'))})
 ---
 ~~~
 
