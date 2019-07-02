@@ -37,17 +37,19 @@ During this session you'll get a brief introduction to R Markdown. You'll learn 
 ![](./img/rstudio.png) ![](./img/rmarkdown.png) ![](./img/knitr.png)
 </center>
 
+
 ## Learning Objectives
 
-The only pre-requisite is having R and RStudio installed on your computer since the needed packages are installed by default. You don’t really need to know much R programming to produce professionally marked up documents.
+The only pre-requisite is having R and RStudio installed on your computer since the needed packages are installed by default. You don’t need much R programming knowledge to produce professionally marked up documents.
 
 After completing this lesson you should be able to:
 
-1. Create and edit an R Notebook from scratch in RStudio.
+1. Create and edit an R Notebook from scratch.
 
 2. Knit an R Notebook containing commonly used R Markdown commands into an HTML document.
 
 3. Know where to get further information on more advanced R Markdown usage.
+
 
 ## Source materials
 
@@ -61,11 +63,12 @@ The materials for this lesson are derived heavily from the following places whic
 
 * [R Markdown](https://rmarkdown.rstudio.com/lesson-1.html) [@rmarkdown]
 
+
 ## Why use R Markdown?
 
-As an analyst you'll regularly prepare reports to document your methods and communicate your findings. And these reports will likely contain a mixture of worded explanations, tables of data, and graphical figures. An R Markdown file, via the `knitr`[^knitr] package, allows you to embed code for generating graphs and figures amongst other explanatory text all within the one source file. Should you wish to change some text or fix an error, at the click of a button you can recompile a new `.HTML`, `.PDF`, or `.DOCX` report immediately.
+As an analyst you'll regularly prepare reports to document your methods and communicate your findings. And these reports will likely contain a mixture of worded explanations, tables of data, and graphical figures. An R Markdown file, via the `knitr`[^knitr] package, allows you to embed code for generating graphs and figures amongst other explanatory text -- all within the one source file. Should you wish to change some text or fix an error you can at the click of a button you can recompile a new `.HTML`, `.PDF`, or `.DOCX` report immediately.
 
-Aside from the convenience of not needing to copy and paste between different source documents, an R Notebook fully encapsulates your work and is easily shareable as reproducible research [@peng2014TheImportant]. By sharing your R Notebook with collaborators or colleagues (or even sceptics!) they can take your data, code, and text, and reproduce the exact same analysis as you conducted.
+Aside from the convenience of avoiding copy-pasting between different source documents, an R Notebook fully encapsulates your work and is easily shareable as reproducible research [see @peng2014TheImportant for the distinction between reproducible and replicable]. By [sharing](https://github.com/shihchingfu/intro-to-rmd/blob/master/intro-to-rmd.Rmd) your R Notebook with collaborators or colleagues (sceptics?) they can take your data, code, and text, and reproduce the exact same analysis as you conducted.
 
 [^knitr]: knitr, http://yihui.name/knitr/
 
@@ -81,13 +84,15 @@ According to @grolemund2017RScience, R Markdown files are designed for use in th
 
 2. Collaborating with other analysts who are interested in *both* your conclusions and how you reached them.
 
-3. As an environment in which to conduct analysis, as a modern day lab notebook where you can capture both what you did and what you were thinking at the time.
+3. As an environment in which to conduct analysis; a modern day lab notebook where you can capture both what you did and what you were thinking at the time.
+
 
 # R Notebook Usage
 
+
 ## Creating an R Notebook
 
-RStudio includes all that you need to get started with creating an R Notebook. The steps below create a new (HTML) notebook with file extension `.Rmd` pre-filled by RStudio with some basic R Markdown content.
+RStudio includes all that you need to get started with creating an R Notebook. The steps below create a new (HTML) notebook with file extension `.Rmd` that's pre-filled with some basic R Markdown content.
 
 1. Launch RStudio
 
@@ -105,12 +110,12 @@ RStudio includes all that you need to get started with creating an R Notebook. T
 
 5. Leave the *Default Output Format* as *HTML* and click *OK*.
 
-From the screenshot above you might already realise that R Markdown can be processed into various output types and formats, e.g., PDF Document, HTML slide presentation.
+From the steps above you might notice that R Markdown can be processed into various output types and formats, e.g., PDF Document, HTML slide presentation.
 
 <p><div class="boxed" style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
 **Exercise 1**
 
-1. Create a new RStudio project called `my-project`.
+1. Create a new RStudio project called "my-project".
 
 2. Create a new R Notebook entitled "My Notebook" with a *Default Output Format* of *HTML*.
 
@@ -122,9 +127,10 @@ From the screenshot above you might already realise that R Markdown can be proce
 
 </div></p>
 
+
 ## Structure of `.Rmd` files
 
-From the exercise above you'll have observed that an R Markdown `.Rmd` file has three components. We shall go into more details later but briefly:
+From the exercise above you'll have observed the three typical components of an R Markdown `.Rmd` file, briefly:
 
 + **Formatted text**
 
@@ -141,7 +147,7 @@ From the exercise above you'll have observed that an R Markdown `.Rmd` file has 
 
 ## Running R code chunks
 
-Run a code chunk by clicking the *Run Current Chunk* button (green arrow) within the chunk or by placing your cursor inside the chunk and pressing <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>.
+Run a code chunk by clicking the *Run Current Chunk* button (green arrow) within the chunk or (preferably) by placing the cursor inside the chunk and pressing <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>.
 
 <center>
 ![](./img/runchunk.png)
@@ -149,17 +155,18 @@ Run a code chunk by clicking the *Run Current Chunk* button (green arrow) within
 
 The output of the code chunk is displayed within the notebook inside the *Source* editor pane.
 
-You can clear this output by clicking the *Clear Output* icon (small cross) found in the top right corner of the chunk output. You could also pop-out its own window or hide the output.
+You can clear this output by clicking the *Clear Output* icon (small cross) found in the top right corner of the chunk output. You can also pop-out a separate output window or hide it altogether.
 
 <center>
 ![](./img/clearchunkoutput.png)
 </center>
 
+
 ## Knitting an R Notebook
 
-'Knitting' an R Notebook refers to compiling it into an output document.
+'Knitting' an R Notebook means to compile it into an output document.
 
-When you knit an R Notebook the `.Rmd` file is sent to `knitr` which executes any code chunks and creates an intermediate Markdown `.md` document. This `.md` file containing both the code and its output is processed by `pandoc`[^pandoc] into the finished file. 
+When you knit an R Notebook the `.Rmd` file is sent to `knitr` which executes any code chunks and creates an intermediate Markdown `.md` document. This `.md` file contains both the code and its output and is processed by `pandoc`[^pandoc] into the finished file. 
 
 [^pandoc]: pandoc, http://pandoc.org/
 
@@ -168,7 +175,7 @@ When you knit an R Notebook the `.Rmd` file is sent to `knitr` which executes an
 
 </center>
 
-The advantage of this two-step workflow is that you can create a wide range of output formats from the same `.Rmd` file. For example, slide presentations, dashboards, websites, and webapps.
+The advantage of this two-step workflow is being able to create a wide range of output formats from the same `.Rmd` file. For example, slide presentations, dashboards, websites, and web apps.
 
 To knit a notebook in RStudio, click the *Knit* button found in the toolbar of the *Source* editor pane, or use the keyboard shortcut <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd>.
 
@@ -183,6 +190,7 @@ Set your preferred preview location by clicking the white cog button and choosin
 <center>
 ![](./img/previewinviewer.png)
 </center>
+<br>
 
 #### Previewing an HTML *Notebook* {-}
 
@@ -193,11 +201,11 @@ If the output type specified in the YAML header is `html_notebook` (rather than 
 
 1. Knit to HTML the notebook `my-notebook.Rmd` that you created in Exercise 1.
 
-2. Observe the correspondence between the R Markdown and the resultant document, particularly the R code embedded in 'code chunks' (we discuss these later).
+2. Observe the correspondence between the R Markdown and the resultant document, particularly the R code embedded in the code chunks.
 
-3. Make some changes to the `.Rmd` file and re-knit the document. Perhaps delete some text or  add `head(cars)` or `str(cars)` to an existing code chunk.
+3. Make some changes to the `.Rmd` file and re-knit the document. Perhaps delete some text or add `head(cars)` or `str(cars)` to an existing code chunk.
 
-4. Confirm that you can see your changes reflected in the re-knitted document.
+4. Confirm that you can see the changes reflected in the re-knitted document.
 
 TIP: Use the keyboard shortcut <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd> to save and knit a notebook in a single action.
 
@@ -206,9 +214,11 @@ TIP: Use the keyboard shortcut <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd>
 
 # R Markdown Syntax
 
+
 ## Formatted Text
 
 Text in `.Rmd` files is written in `pandoc` R Markdown whose syntax is designed to be human-readable and suggestive of its final HTML rendering. In the examples below you'll see that styled text is usually enclosed by special characters. 
+
 
 ### Headings
 
@@ -226,6 +236,7 @@ Headings are defined using hash `#` characters. The more hashes, the less promin
 ### Level 3 heading
 ~~~
 
+
 ### Inline text styles
 
 *Italic* styling is applied using single asterisks or underscores: `*italic*` or `_italic_`
@@ -234,13 +245,14 @@ Headings are defined using hash `#` characters. The more hashes, the less promin
 
 ***Bold & italic*** styling is applied using triple asterisks or underscores: `***bold & italic***` or  `___bold & italic___`
 
-`Inline code` styling is applied using single backticks: `` `plot(iris)` ``
+`Inline code` styling is applied using backticks: `` `plot(iris)` ``
 
 S^uperscripting^ is applied using carets: `S^uperscripting^`
 
 S~ubscripting~ is applied using tildes: `S~ubscripting~`
 
 ~~Strikethrough~~ is applied using double tildes: `~~Strikethrough~~`
+
 
 ### Inline R code
 
@@ -257,6 +269,7 @@ The `iris` dataset has `r nrow(iris)` rows.
 
 </div></p>
 
+
 ### $\LaTeX$ equations
 
 Surrounding an expression with dollar symbols `$` will have `knitr` interpret it as in-line $\LaTeX$ formatting. 
@@ -271,7 +284,6 @@ Output:
 Sum of integer powers of a half is $\sum_{n=1}^{\infty} 2^{-n} = 1$
 </div></p>
 
-
 Using double dollar symbols `$$` will centre the equation on its own line. 
 
 ~~~
@@ -283,6 +295,7 @@ Output:
 
 Sum of integer powers of a half is $$\sum_{n=1}^{\infty} 2^{-n} = 1$$
 </div></p>
+
 
 ### Links
 
@@ -311,6 +324,7 @@ Output:
 [hypertext link](http://example.com)
 </div></p>
 
+
 ### Footnotes
 
 You can insert hyperlinked footnotes using square bracket and caret syntax `[^footnoteID]`. The footnote ID can be any string of characters without spaces. 
@@ -338,6 +352,7 @@ The definition of the footnote must appear in the R Notebook somewhere _after_ i
 
 The footnote itself appears at the end of the HTML document with a convenient hyperlink back to where it appears in the document.
 
+
 ### Images
  
 Images are inserted by providing a file path to the image, either a link to a locally stored file or a URL to an image hosted online. Notice the leading exclamation mark `!` and caption in square parentheses `[]`. Leave the square parentheses empty for no caption.
@@ -352,6 +367,7 @@ Output:
 ![source: [xkcd.com](https://xkcd.com/license.html)](./img/purity.png)
 
 </div></p>
+
 
 ### Unordered Lists
 
@@ -375,6 +391,7 @@ Output:
     * Another nested item
 
 </div></p>
+
 
 ### Ordered Lists
 
@@ -405,6 +422,7 @@ Output:
 
 </div></p>
 
+
 ### Block quotations
 
 Block quotations are created by prefixing each line with the greater-than symbol `>`.
@@ -428,9 +446,10 @@ Output:
 
 </div></p>
 
+
 ### Tables
 
-Manually create a static table using hyphens `-` and pipes `|` to indicate the header row and columns respectively. Rows are ended by a carriage return.
+Manually create a static table using hyphens `-` and pipes `|` to indicate the header row and columns respectively. Rows are terminated by a carriage return.
 
 ~~~
 First Header  | Second Header | Third Header
@@ -448,6 +467,7 @@ Cell content  | Cell content  | Cell content
 Cell content  | Cell content  | Cell content
 
 </div></p>
+
 
 #### Tabular code output {-}
 
@@ -484,6 +504,7 @@ kable(head(iris))
 
 </div></p>
 
+
 ### Horizontal rules
 
 Horizontal rules are inserted using three or more consecutive asterisks `*` or hyphens `-`.
@@ -513,7 +534,7 @@ mean(iris$Sepal.Length)` ``
 
 3. Under the heading, use an ordered list with nesting to create the outline of a typical scientific report, e.g., Introduction, Data Description, Methodology, etc.
 
-   NOTE: You'll learn how to insert an autogenerated Table of Contents later.
+   You'll see how to insert a nicer, autogenerated Table of Contents later.
 
 4. Format some of the list items using the text styles mentioned above.
 
@@ -528,11 +549,12 @@ mean(iris$Sepal.Length)` ``
 
 </div></p>
 
+
 ## Code Chunks
 
 Code is inserted into R Notebooks in 'code chunks'. Upon knitting, these chunks are executed and their results inserted directly into the finished document. Embedding code alongside prose annotations of your methods and results speaks to the ethos of reproducible research.
 
-Code chunks are enclosed by three backticks `` ``` `` followed by curly parentheses `{}` containing comma-separated parameters for that chunk (if any). 
+Code chunks are enclosed by three backticks `` ``` `` with a prefix of curly parentheses `{}` containing parameters for that chunk (if any). 
 
 ````
 ```{r Structure of iris dataset}`r ''`
@@ -564,7 +586,7 @@ str(iris)
 
 1. Add a new R chunk by clicking in your notebook where you want to insert the chunk and clicking the *Insert* button on the toolbar. 
 
-   Alternatively (and preferably) use the <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> keyboard shortcut.
+   Alternatively use the <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> keyboard shortcut.
    
    ![](./img/insertrchunk.png)
 
@@ -578,15 +600,16 @@ str(iris)
 
 4. Insert and run a couple more code chunks containing R code of your choosing. 
 
-5. Knit your notebook to HTML and check that the output is as you expect.
+5. Knit your notebook to HTML and check that the output is as you'd expect.
 
 </div></p>
 
+
 ### Chunk options
 
-You can specify in the curly parentheses `{}` further options that affect how a chunk is knitted into the final document. 
+You can list in the curly parentheses `{}` various options for changing how a chunk is knitted into the final document. 
 
-See <https://yihui.name/knitr/options> for a full list of options whereas only a few commonly used options are shown here.
+See <https://yihui.name/knitr/options> for all the available options; only a few commonly used options are shown here.
 
 *a) Show the code and the output (default)*
 
@@ -656,9 +679,10 @@ colMeans(iris[,-5])
 
 </div></p>
 
+
 #### The setup chunk {-}
 
-A special code chunk is one named *setup*. The setup chunk is automatically run just before any other code chunk is executed. It is useful for loading R `library`s and data before proceeding with further analysis. 
+A special code chunk (if it exists) is the one named *setup*. The setup chunk is automatically run just before any other code chunk is executed. It is useful for loading R `library`s and data used subsequent analyses. 
 
 ````
 ```{r setup, include=FALSE} `r ''`
@@ -672,9 +696,9 @@ Recall that `include=FALSE` prevents the setup chunk from inserting any output i
 <p><div class="boxed" style="background-color: #eec27510; padding: 10px; border: 1px solid #eec275">
 **Exercise 6**
 
-1. Duplicate (copy/paste) the code chunk from Exercise 5 but specify a different output option from amongst those mentioned above. Observe the different output in the knitted document.
+1. Duplicate (copy-paste) the code chunk from Exercise 5 but specify a different output option from amongst those mentioned above. Observe the different output in the knitted document.
 
-   HINT: instead of manually typing the output options, RStudio provides a shortcut by clicking *Modify Chunk Options* icon (grey cog) found in the top right corner of the chunk next to the *Run Current Chunk* button. 
+   HINT: instead of manually typing the output options, RStudio provides a shortcut by clicking the *Modify Chunk Options* icon (grey cog) found in the top right corner of the chunk next to the *Run Current Chunk* button. 
 
    ![](./img/chunkoptions.png)
 
@@ -684,9 +708,10 @@ Recall that `include=FALSE` prevents the setup chunk from inserting any output i
 
 </div></p>
 
+
 ### Figure options
 
-Below is an example of a chunk that produces a figure rather than a numerical output, namely a boxplot of sepal widths from the `iris` dataset split by species.
+Below is an example of a chunk that produces a figure rather than numerical output, namely a boxplot of sepal widths from the `iris` dataset.
 
 ````
 ```{r sepal width boxplot, echo=FALSE} `r ''`
@@ -703,7 +728,7 @@ boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3), main="Iris sepa
 
 </div></p>
 
-We can resize and align the plot using the `fig.height` and `fig.width` chunk options.
+We can resize the plot using the `fig.height` and `fig.width` chunk options.
 
 ````
 ```{r sepal width boxplot echo=FALSE, fig.height=3, fig.width=3} `r ''`
@@ -737,7 +762,7 @@ Check these exercises by re-running the edited code chunk and re-knitting the wh
 
 HINT: You may need to check the online documentation mentioned above.
 
-1. Duplicate (copy/paste) the code chunk of one of the figures in your notebook (remember to rename it if necessary) and use the `fig.asp` figure option to set its aspect ratio to be square, i.e., 1:1.
+1. Duplicate (copy-paste) the code chunk of one of the figures in your notebook (renaming it if necessary) and use the `fig.asp` figure option to set its aspect ratio to be square, i.e., 1:1.
 
 2. Now apply the `fig.align` option to centre it on the page.
 
@@ -745,13 +770,14 @@ HINT: You may need to check the online documentation mentioned above.
 
 </div></p>
 
+
 ## YAML Header
 
-At the top of a `.Rmd` file, enclosed by triple hyphens `---`, is the YAML[^yaml] header. It specifies settings that affect the entire document, in particular the output type.
+At the top of a `.Rmd` file, enclosed by triple hyphens `---`, is the YAML[^yaml] header. It defines settings that affect the entire document, in particular specifying the output type.
 
-[^yaml]: YAML stands for Yet Another Markup Language.
+[^yaml]: YAML stands for YAML Ain't Markup Language. It's a recursive name!
 
-Below is the default YAML header created by RStudio for new R Notebooks. It sets the R Markdown file to knit to an HTML notebook  `html_notebook`.
+Below is the default YAML header created by RStudio for new R Notebooks. It sets the R Markdown file to knit to an HTML notebook `html_notebook`.
 
 ~~~
 ---
@@ -760,7 +786,7 @@ output: html_notebook
 ---
 ~~~
 
-Other document output types include  PDF, Word, and HTML documents (distinct from HTML *notebook*). Note that PDF output requires $\LaTeX$ to be installed and you need Microsoft Word (or equivalent) to preview Word outputs.
+Other document output types include PDF, Word, and HTML documents (distinct from HTML *notebook*). Note that PDF output requires $\LaTeX$ (see the `tinytex` R package) and you obviously need Microsoft Word or an equivalent to preview Word outputs.
 
 ~~~
 ---
@@ -772,7 +798,7 @@ output:
 ---
 ~~~
 
-Alternatively, you can produce a presentation by setting `beamer_presentation`, `ioslides_presentation`, or `slidy_presentation` as the output parameter.
+Alternatively, you can produce a slide deck by setting the output parameter to be `beamer_presentation`, `ioslides_presentation`, or `slidy_presentation`.
 
 ~~~
 ---
@@ -786,9 +812,10 @@ output:
 
 See [Chapter 4](https://bookdown.org/yihui/rmarkdown/presentations.html) of @xie2018RGuide for a full breakdown of these types. 
 
+
 #### HTML document settings {-}
 
-The focus of this lesson is knitting HTML documents (`html_document` output type). There are many settings available as illustrated by the YAML header used in the `.Rmd` file for this lesson:
+The focus of this lesson is knitting HTML documents (the `html_document` output type). There are many settings available as illustrated by the YAML header used in the `.Rmd` file for this lesson:
 
 ~~~
 ---
@@ -818,6 +845,7 @@ knit:
 
 See [Part II](https://bookdown.org/yihui/rmarkdown/documents.html) of @xie2018RGuide for full details of options for various output types.
 
+
 ## Bibliographies
 
 R Markdown supports common bibliography formats such as BibTeX, BibLaTeX, and EndNote.
@@ -834,7 +862,7 @@ bibliography: ref.bib
 ---
 ~~~
 
-Here's a sample BibTeX record from the `ref.bib` file:
+Here's a sample BibTeX record from the abovementioned `ref.bib` file:
 
 ~~~
 @book{xie2018RGuide, 
@@ -858,17 +886,21 @@ Part II of @xie2018RGuide describes the various output formats available with R 
 
 </div></p>
 
-# Practise your knitting
+
+# End of the beginning
 
 There is ***much*** more to R Markdown than what's covered here!
 
-The sources mentioned in the bibliography below are good starting points for developing your R Markdown expertise. Gallery pages such as <https://yihui.name/knitr/demo/showcase/> are also a great place to start.
+The sources mentioned in the bibliography below are good starting points for further developing your R Markdown expertise. Galleries such as <https://yihui.name/knitr/demo/showcase/> are also a great place to start.
 
-Lastly, RStudio has 'cheatsheets' that you can access via the *Help* menu. They are a convenient printable reference of commonly used syntax and commands.
+RStudio also provides 'cheatsheets' that are accessible from the *Help* menu. These are a convenient printable reference of commonly used syntax and commands.
 
 <center>
 ![](./img/cheatsheets.png)
 </center>
+
+May the `knitr` be with you.
+
 
 # Bibliography
 
