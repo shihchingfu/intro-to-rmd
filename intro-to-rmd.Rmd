@@ -34,7 +34,7 @@ During this session you'll get a brief introduction to R Markdown. You'll learn 
 [^rstudio]: RStudio, https://www.rstudio.com/
 
 <center>
-![](http://hexb.in/hexagons/rstudio.png) ![](http://hexb.in/hexagons/rmarkdown.png) ![](http://hexb.in/hexagons/knitr.png)
+![](./img/rstudio.png) ![](./img/rmarkdown.png) ![](./img/knitr.png)
 </center>
 
 ## Learning Objectives
@@ -71,7 +71,7 @@ Aside from the convenience of not needing to copy and paste between different so
 
 <center>
 
-![source: "Piled Higher and Deeper" by Jorge Cham](http://phdcomics.com/comics/archive/phd031214s.gif)
+![source: "Piled Higher and Deeper" by Jorge Cham](./img/phd031214s.png)
 
 </center>
 
@@ -97,11 +97,11 @@ RStudio includes all that you need to get started with creating an R Notebook. T
 
 3. Click *New File* $\blacktriangleright$ *R Markdown...*
 
-   ![](./createnewrmarkdown.png)
+   ![](./img/createnewrmarkdown.png)
 
 4. Choose *Document* from the list and enter "My Notebook" and your name into the *Title* and *Author* fields respectively.
 
-   ![](./newmarkdowndialog.png)
+   ![](./img/newmarkdowndialog.png)
 
 5. Leave the *Default Output Format* as *HTML* and click *OK*.
 
@@ -116,7 +116,7 @@ From the screenshot above you might already realise that R Markdown can be proce
 
 3. Save the notebook as `my-notebook.Rmd`.
 
-   ![](./mynotebook.png)
+   ![](./img/mynotebook.png)
 
 4. Identify the YAML header, formatted text, and any 'code chunks'.
 
@@ -144,7 +144,7 @@ From the exercise above you'll have observed that an R Markdown `.Rmd` file has 
 Run a code chunk by clicking the *Run Current Chunk* button (green arrow) within the chunk or by placing your cursor inside the chunk and pressing <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>.
 
 <center>
-![](./runchunk.png)
+![](./img/runchunk.png)
 </center>
 
 The output of the code chunk is displayed within the notebook inside the *Source* editor pane.
@@ -152,7 +152,7 @@ The output of the code chunk is displayed within the notebook inside the *Source
 You can clear this output by clicking the *Clear Output* icon (small cross) found in the top right corner of the chunk output. You could also pop-out its own window or hide the output.
 
 <center>
-![](./clearchunkoutput.png)
+![](./img/clearchunkoutput.png)
 </center>
 
 ## Knitting an R Notebook
@@ -164,7 +164,7 @@ When you knit an R Notebook the `.Rmd` file is sent to `knitr` which executes an
 [^pandoc]: pandoc, http://pandoc.org/
 
 <center>
-![source: @grolemund2017RScience](./rmarkdownflow.png)
+![source: @grolemund2017RScience](./img/rmarkdownflow.png)
 
 </center>
 
@@ -173,7 +173,7 @@ The advantage of this two-step workflow is that you can create a wide range of o
 To knit a notebook in RStudio, click the *Knit* button found in the toolbar of the *Source* editor pane, or use the keyboard shortcut <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd>.
 
 <center>
-![](./knitnotebook.png)
+![](./img/knitnotebook.png)
 </center>
 
 A preview of the knitted document will appear in its own window (or depending on your RStudio settings, in the *Viewer* pane). 
@@ -181,7 +181,7 @@ A preview of the knitted document will appear in its own window (or depending on
 Set your preferred preview location by clicking the white cog button and choosing *Preview in Window* or *Preview in Viewer Pane*.
 
 <center>
-![](./previewinviewer.png)
+![](./img/previewinviewer.png)
 </center>
 
 #### Previewing an HTML *Notebook* {-}
@@ -349,7 +349,7 @@ Images are inserted by providing a file path to the image, either a link to a lo
 <p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
-![source: [xkcd.com](https://xkcd.com/license.html)](https://imgs.xkcd.com/comics/purity.png)
+![source: [xkcd.com](https://xkcd.com/license.html)](./img/purity.png)
 
 </div></p>
 
@@ -545,7 +545,7 @@ In the above example the first parameter `r` indicates that the chunk contains R
 After the `r` is an optional name for this chunk. This helps with finding the chunk in the code navigator found in the bottom left of the *Source* editor pane.
 
 <center>
-![](./namedchunk.png)
+![](./img/namedchunk.png)
 </center>
 
 The knitted notebook will therefore include both the code and its output one after the other.
@@ -566,7 +566,7 @@ str(iris)
 
    Alternatively (and preferably) use the <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> keyboard shortcut.
    
-   ![](./insertrchunk.png)
+   ![](./img/insertrchunk.png)
 
 2. Name this chunk "summary iris" and confirm that name appears in the code chunk navigation menu.
 
@@ -574,7 +574,7 @@ str(iris)
 
 4. Run the chunk by clicking the *Run Current Chunk* button or by pressing <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>. 
    
-   ![](./runchunk.png)
+   ![](./img/runchunk.png)
 
 4. Insert and run a couple more code chunks containing R code of your choosing. 
 
@@ -676,7 +676,7 @@ Recall that `include=FALSE` prevents the setup chunk from inserting any output i
 
    HINT: instead of manually typing the output options, RStudio provides a shortcut by clicking *Modify Chunk Options* icon (grey cog) found in the top right corner of the chunk next to the *Run Current Chunk* button. 
 
-   ![](./chunkoptions.png)
+   ![](./img/chunkoptions.png)
 
    The popup also has a [*Chunk options*](https://yihui.name/knitr/options/) link to documentation on  available chunk options.
 
@@ -867,7 +867,7 @@ The sources mentioned in the bibliography below are good starting points for dev
 Lastly, RStudio has 'cheatsheets' that you can access via the *Help* menu. They are a convenient printable reference of commonly used syntax and commands.
 
 <center>
-![](./cheatsheets.png)
+![](./img/cheatsheets.png)
 </center>
 
 # Bibliography
