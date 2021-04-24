@@ -63,7 +63,7 @@ The materials for this lesson are derived heavily from the following places whic
 
 * [R Markdown](https://rmarkdown.rstudio.com/lesson-1.html) [@rmarkdown]
 
-Some examples use the `penguins` data found in the `palmerpenguins` [@palmerpenguins] package, install and load this package by:
+Some examples use the `penguins` dataset found in the `palmerpenguins` package [@palmerpenguins]:
 
 ```{r echo=TRUE, eval=FALSE}
 install.packages("palmerpenguins")

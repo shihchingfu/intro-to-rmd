@@ -1,2 +1,2 @@
 # intro-to-rmd
-ResBaz Perth 2019 elective on R Markdown
+Originally presented as an elective at ResBaz Perth 2019.
