@@ -25,7 +25,7 @@ knit:
 
 ```{r setup, include=FALSE}
 library(knitr)
-data("iris")
+library(palmerpenguins)
 ```
 
 # Welcome
@@ -246,7 +246,7 @@ Headings are defined using hash `#` characters. The more hashes, the less promin
 
 ***Bold & italic*** styling is applied using triple asterisks or underscores: `***bold & italic***` or  `___bold & italic___`
 
-`Inline code` styling is applied using backticks: `` `plot(iris)` ``
+`Inline code` styling is applied using backticks: `` `plot(penguins)` ``
 
 S^uperscripting^ is applied using carets: `S^uperscripting^`
 
@@ -260,13 +260,13 @@ S~ubscripting~ is applied using tildes: `S~ubscripting~`
 R code can be embedded inline by surrounding it in backticks `` ` `` and inserting a single `r` character prefix. This code is executed and replaced with its output when the notebook is knitted.
 
 ~~~
-The `iris` dataset has ``r 'r nrow(iris)'`` rows.
+The `penguins` dataset has ``r 'r nrow(penguins)'`` rows.
 ~~~
 
 <p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
-The `iris` dataset has `r nrow(iris)` rows.
+The `penguins` dataset has `r nrow(penguins)` rows.
 
 </div></p>
 
@@ -476,14 +476,14 @@ If the output of a code chunk is a table of values, R Markdown will render it ac
 
 ````
 ```{r}`r ''`
-head(iris)
+head(penguins)
 ```
 ````
 <p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
 ```{r}
-head(iris)
+head(penguins)
 ```
 
 </div></p>
@@ -492,7 +492,7 @@ To get nicer looking tables we can use the `kable()` function from the `knitr` p
 
 ````
 ```{r}`r ''`
-kable(head(iris))
+kable(head(penguins))
 ```
 ````
 
@@ -500,7 +500,7 @@ kable(head(iris))
 Output:
 
 ```{r}
-kable(head(iris))
+kable(head(penguins))
 ```
 
 </div></p>
@@ -528,8 +528,8 @@ Remember to __re-knit__ the notebook to see your changes.
 
 1. Put a horizontal rule underneath the content in your R notebook from Exercise 2 (`my-notebook.Rmd`).
 
-2. Below the horizontal rule insert some text with inline R code, e.g., `` Mean sepal width is `r
-mean(iris$Sepal.Length)` ``
+2. Below the horizontal rule insert some text with inline R code, e.g., `` Mean bill length is `r
+mean(penguins$bill_length_mm)` ``
 
 2. Insert a heading called "Table of Contents"
 
@@ -558,8 +558,8 @@ Code is inserted into R Notebooks in 'code chunks'. Upon knitting, these chunks 
 Code chunks are enclosed by three backticks `` ``` `` with a prefix of curly parentheses `{}` containing parameters for that chunk (if any). 
 
 ````
-```{r Structure of iris dataset}`r ''`
-str(iris)
+```{r Structure of penguins dataset}`r ''`
+str(penguins)
 ```
 ````
 
@@ -576,8 +576,8 @@ The knitted notebook will therefore include both the code and its output one aft
 <p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
-```{r Structure of iris dataset}
-str(iris)
+```{r Structure of penguins dataset}
+str(penguins)
 ```
 
 </div></p>
@@ -591,9 +591,9 @@ str(iris)
    
    ![](./img/insertrchunk.png)
 
-2. Name this chunk "summary iris" and confirm that name appears in the code chunk navigation menu.
+2. Name this chunk "summary penguins" and confirm that name appears in the code chunk navigation menu.
 
-3. Add this R code into the chunk: `summary(iris)`.
+3. Add this R code into the chunk: `summary(penguins)`.
 
 4. Run the chunk by clicking the *Run Current Chunk* button or by pressing <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>. 
    
@@ -616,7 +616,7 @@ See <https://yihui.name/knitr/options> for all the available options; only a few
 
 ````
 ```{r}`r ''`
-colMeans(iris[,-5])
+colMeans(penguins[,3:6], na.rm = TRUE)
 ```
 ````
 
@@ -624,7 +624,7 @@ colMeans(iris[,-5])
 Output:
 
 ```{r}
-colMeans(iris[,-5])
+colMeans(penguins[,3:6], na.rm = TRUE)
 ```
 
 </div></p>
@@ -633,7 +633,7 @@ colMeans(iris[,-5])
 
 ````
 ```{r, eval=FALSE}`r ''`
-colMeans(iris[,-5])
+colMeans(penguins[,3:6], na.rm = TRUE)
 ```
 ````
 
@@ -641,7 +641,7 @@ colMeans(iris[,-5])
 Output:
 
 ```{r, eval=FALSE}
-colMeans(iris[,-5])
+colMeans(penguins[,3:6], na.rm = TRUE)
 ```
 
 </div></p>
@@ -650,7 +650,7 @@ colMeans(iris[,-5])
 
 ````
 ```{r, echo=FALSE}`r ''`
-colMeans(iris[,-5])
+colMeans(penguins[,3:6], na.rm = TRUE)
 ```
 ````
 
@@ -658,7 +658,7 @@ colMeans(iris[,-5])
 Output:
 
 ```{r, echo=FALSE}
-colMeans(iris[,-5])
+colMeans(penguins[,3:6], na.rm = TRUE)
 ```
 
 </div></p>
@@ -667,7 +667,7 @@ colMeans(iris[,-5])
 
 ````
 ```{r, include=FALSE}`r ''`
-colMeans(iris[,-5])
+colMeans(penguins[,3:6], na.rm = TRUE)
 ```
 ````
 
@@ -675,7 +675,7 @@ colMeans(iris[,-5])
 Output:
 
 ```{r, include=FALSE}
-colMeans(iris[,-5])
+colMeans(penguins[,3:6], na.rm = TRUE)
 ```
 
 </div></p>
@@ -688,7 +688,7 @@ A special code chunk (if it exists) is the one named *setup*. The setup chunk is
 ````
 ```{r setup, include=FALSE} `r ''`
 library(knitr)
-data("iris")
+library(palmerpenguins)
 ```
 ````
 
@@ -712,19 +712,19 @@ Recall that `include=FALSE` prevents the setup chunk from inserting any output i
 
 ### Figure options
 
-Below is an example of a chunk that produces a figure rather than numerical output, namely a boxplot of sepal widths from the `iris` dataset.
+Below is an example of a chunk that produces a figure rather than numerical output, namely a boxplot of bill lengths (millimetres) from the `penguins` dataset.
 
 ````
-```{r sepal width boxplot, echo=FALSE} `r ''`
-boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3))
+```{r bill length boxplot, echo=FALSE} `r ''`
+boxplot(bill_length_mm ~ species, data = penguins, col = hcl.colors(3), main = "Penguin Bill Lengths")
 ```
 ````
 
 <p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
-```{r sepal width boxplot, echo=FALSE}
-boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3), main="Iris sepal widths")
+```{r bill length boxplot, echo=FALSE}
+boxplot(bill_length_mm ~ species, data = penguins, col = hcl.colors(3), main = "Penguin Bill Lengths")
 ```
 
 </div></p>
@@ -732,8 +732,8 @@ boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3), main="Iris sepa
 We can resize the plot using the `fig.height` and `fig.width` chunk options.
 
 ````
-```{r sepal width boxplot echo=FALSE, fig.height=3, fig.width=3} `r ''`
-boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3))
+```{r bill length boxplot echo=FALSE, fig.height=3, fig.width=3} `r ''`
+boxplot(bill_length_mm ~ species, data = penguins, col = hcl.colors(3), main = "Penguin Bill Lengths")
 ```
 ````
 
@@ -741,7 +741,7 @@ boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3))
 Output:
 
 ```{r echo=FALSE, fig.height=3, fig.width=3}
-boxplot(Sepal.Width ~ Species, data = iris, col = hcl.colors(3), main="Iris sepal widths")
+boxplot(bill_length_mm ~ species, data = penguins, col = hcl.colors(3), main = "Penguin Bill Lengths")
 ```
 
 </div></p>
@@ -822,7 +822,7 @@ The focus of this lesson is knitting HTML documents (the `html_document` output 
 ---
 title: "Introduction to R Markdown"
 author: "[Shih Ching Fu](https://shihchingfu.com)"
-date: "[ResBaz Perth 2019](https://resbaz.github.io/resbaz2019/perth/)"
+date: "April 2021"
 bibliography: ref.bib
 output:
   #slidy_presentation: default
@@ -836,6 +836,7 @@ output:
     theme: readable
     highlight: haddock
     code_folding: show
+    code_download: true
 knit: 
   (function(input_file, encoding) {
     rmarkdown::render(input_file,
@@ -902,6 +903,12 @@ RStudio also provides 'cheatsheets' that are accessible from the *Help* menu. Th
 
 May the `knitr` be with you.
 
+
+# R Session Info
+
+```{r echo=FALSE, paged.print=FALSE}
+devtools::session_info()
+```
 
 # Bibliography
 
