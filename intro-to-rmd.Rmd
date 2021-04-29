@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R Markdown"
 author: "[Shih Ching Fu](https://shihchingfu.com)"
-date: "April 2021"
+date: "May 2021"
 bibliography: ref.bib
 output:
   #slidy_presentation: default
@@ -99,7 +99,9 @@ According to @grolemund2017RScience, R Markdown files are designed for use in th
 
 ## Creating an R Notebook
 
-RStudio includes all that you need to get started with creating an R Notebook. The steps below create a new (HTML) notebook with file extension `.Rmd` that's pre-filled with some basic R Markdown content.
+RStudio includes all that you need to get started with creating an R Notebook. The `rmarkdown`[^rmdpkg] package comes already installed. The steps below create a new (HTML) notebook with file extension `.Rmd` that's pre-filled with some basic R Markdown content.
+
+[^rmdpkg]: rmarkdown, https://pkgs.rstudio.com/rmarkdown/index.html
 
 1. Launch RStudio
 
