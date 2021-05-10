@@ -73,7 +73,7 @@ library(palmerpenguins)
 
 ## Why use R Markdown?
 
-As an analyst you'll regularly prepare reports to document your methods and communicate your findings. And these reports will likely contain a mixture of worded explanations, tables of data, and graphical figures. An R Markdown file, via the `knitr`[^knitr] package, allows you to embed code for generating graphs and figures amongst other explanatory text -- all within the one source file. Should you wish to change some text or fix an error you can at the click of a button you can recompile a new `.HTML`, `.PDF`, or `.DOCX` report immediately.
+As an analyst you'll regularly prepare reports to document your methods and communicate your findings. And these reports will likely contain a mixture of worded explanations, tables of data, and graphical figures. An R Markdown file, via the `knitr`[^knitr] package, allows you to embed code for generating graphs and figures amongst other explanatory text -- all within the one source file. Should you wish to change some text or fix an error you can at the click of a button recompile a new `.HTML`, `.PDF`, or `.DOCX` report immediately.
 
 Aside from the convenience of avoiding copy-pasting between different source documents, an R Notebook fully encapsulates your work and is easily shareable as reproducible research [see @peng2014TheImportant for the distinction between reproducible and replicable]. By [sharing](https://github.com/shihchingfu/intro-to-rmd/blob/master/intro-to-rmd.Rmd) your R Notebook with collaborators or colleagues (sceptics?) they can take your data, code, and text, and reproduce the exact same analysis as you conducted.
 
