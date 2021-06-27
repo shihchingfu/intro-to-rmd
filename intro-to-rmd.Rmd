@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R Markdown"
 author: "[Shih Ching Fu](https://shihchingfu.com)"
-date: "May 2021"
+date: "June 2021"
 bibliography: ref.bib
 output:
   #slidy_presentation: default
@@ -61,15 +61,9 @@ The materials for this lesson are derived heavily from the following places whic
 
 * [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/) [@xie2018RGuide]
 
-* [R Markdown](https://rmarkdown.rstudio.com/lesson-1.html) [@rmarkdown]
+* [rmarkdown: Dynamic Documents for R](https://github.com/rstudio/rmarkdown) (GitHub page)
 
-Some examples use the `penguins` dataset found in the `palmerpenguins` package [@palmerpenguins]:
-
-```{r echo=TRUE, eval=FALSE}
-install.packages("palmerpenguins")
-library(palmerpenguins)
-```
-
+Some examples use the `penguins` dataset found in the `palmerpenguins` package [@palmerpenguins]
 
 ## Why use R Markdown?
 
@@ -268,13 +262,13 @@ S~ubscripting~ is applied using tildes: `S~ubscripting~`
 R code can be embedded inline by surrounding it in backticks `` ` `` and inserting a single `r` character prefix. This code is executed and replaced with its output when the notebook is knitted.
 
 ~~~
-The `penguins` dataset has ``r 'r nrow(penguins)'`` rows.
+The `cars` dataset has ``r 'r nrow(cars)'`` rows.
 ~~~
 
 <p><div class="boxed" style="background-color: #0000EE05; padding: 10px; border: 1px solid blue">
 Output:
 
-The `penguins` dataset has `r nrow(penguins)` rows.
+The `cars` dataset has `r nrow(cars)` rows.
 
 </div></p>
 
@@ -567,6 +561,8 @@ Code chunks are enclosed by three backticks `` ``` `` with a prefix of curly par
 
 ````
 ```{r Structure of penguins dataset}`r ''`
+install.packages("palmerpenguins")
+library(palmerpenguins)
 str(penguins)
 ```
 ````
@@ -830,7 +826,7 @@ The focus of this lesson is knitting HTML documents (the `html_document` output 
 ---
 title: "Introduction to R Markdown"
 author: "[Shih Ching Fu](https://shihchingfu.com)"
-date: "April 2021"
+date: "June 2021"
 bibliography: ref.bib
 output:
   #slidy_presentation: default
@@ -843,7 +839,6 @@ output:
     number_sections: true
     theme: readable
     highlight: haddock
-    code_folding: show
     code_download: true
 knit: 
   (function(input_file, encoding) {
@@ -853,7 +848,14 @@ knit:
 ---
 ~~~
 
+Many of these options also accessible via the "Output options..." item under the R Markdown format options menu (gear icon) in the source pane.
+
+<center>
+![](img/outputoptions.png)
+</center>
+
 See [Part II](https://bookdown.org/yihui/rmarkdown/documents.html) of @xie2018RGuide for full details of options for various output types.
+
 
 
 ## Bibliographies
