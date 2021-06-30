@@ -74,10 +74,11 @@ Aside from the convenience of avoiding copy-pasting between different source doc
 [^knitr]: knitr, http://yihui.name/knitr/
 
 <center>
-
-![source: "Piled Higher and Deeper" by Jorge Cham](./img/phd031214s.png)
-
+[![source: "Piled Higher and Deeper" by Jorge Cham](./img/phd031214s.png)](https://phdcomics.com/comics/archive.php?comicid=1689)
 </center>
+
+[![Image name](image.png)](http://www.host.com/link.html)
+
 
 According to @grolemund2017RScience, R Markdown files are designed for use in three ways:
 
